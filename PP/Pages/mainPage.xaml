@@ -13,7 +13,7 @@
         <TabControl HorizontalAlignment="Left" Height="1080" VerticalAlignment="Top" Width="1920"
                     Style="{StaticResource MaterialDesignFilledTabControl}">
             <TabItem Header="ДОБАВИТЬ ПРОДУКТ">
-                <Grid Background="#FFE5E5E5">
+                <Grid Background="White">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="111*"/>
                         <ColumnDefinition Width="209*"/>
@@ -23,7 +23,9 @@
                         <RowDefinition Height="29*"/>
                         <RowDefinition Height="29*"/>
                         <RowDefinition Height="29*"/>
-                        <RowDefinition Height="239*"/>
+                        <RowDefinition Height="29*"/>
+                        <RowDefinition Height="29*"/>
+                        <RowDefinition Height="181*"/>
                     </Grid.RowDefinitions>
                     <TextBox HorizontalAlignment="Left" Height="62" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="646"
                              materialDesign:HintAssist.Hint="ID" FontSize="20"
@@ -34,21 +36,32 @@
                     <TextBox HorizontalAlignment="Left" Height="62" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="646"
                         materialDesign:HintAssist.Hint="Наименование продукции" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Row="3"/>
+                    <TextBox HorizontalAlignment="Left" Height="62" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="346"
+                        materialDesign:HintAssist.Hint="Количество" FontSize="20"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Row="4"/>
+                    <ComboBox Name="comboBoxUnitName" ItemsSource="{Binding }" HorizontalAlignment="Left" Margin="392,10,0,0" Grid.Row="4" VerticalAlignment="Top" Width="264" Height="67"
+                              materialDesign:HintAssist.Hint="Ед. измерения" FontSize="20"
+                        Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                        <ComboBoxItem>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding UnitName}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBoxItem>
+                        </ComboBox>
+                        <TextBox HorizontalAlignment="Left" Height="62" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="646"
+                        materialDesign:HintAssist.Hint="Примечания" FontSize="20"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Row="5"/>
+                    <Button Content="ДОБАВИТЬ" HorizontalAlignment="Left" Margin="392,10,0,0" Grid.Row="6" VerticalAlignment="Top"
+                            Width="264" Height="73" FontSize="20"/>
                 </Grid>
 
             </TabItem>
-            <TabItem Header="TabItem">
-                <Grid Background="#FFE5E5E5"/>
+            <TabItem Header="РАЗНОЕ">
+                <Grid Background="White"/>
             </TabItem>
-            <TabControl Height="100" Width="100">
-                <TabItem Header="TabItem">
-                    <Grid Background="#FFE5E5E5"/>
-                </TabItem>
-                <TabItem Header="TabItem">
-                    <Grid Background="#FFE5E5E5"/>
-                </TabItem>
-            </TabControl>
-        </TabControl>
 
+        </TabControl>
     </Grid>
 </Page>

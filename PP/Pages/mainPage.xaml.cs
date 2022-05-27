@@ -12,14 +12,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PP.Database;
 
 namespace PP.Pages
 {
     /// <summary>
     /// Логика взаимодействия для mainPage.xaml
     /// </summary>
+    
     public partial class mainPage : Page
     {
+        danil3Entities connection = new danil3Entities();
+
         public mainPage()
         {
             InitializeComponent();

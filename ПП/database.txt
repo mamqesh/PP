@@ -16,6 +16,7 @@ GO
 CREATE TABLE [Product] (
 	ProductID integer NOT NULL,
 	ProductNumber nvarchar(25) NOT NULL,
+	PRIMARY KEY (ProductID,ProductNumber),
 	ProductName nvarchar(100) NOT NULL,
 	[Count] nvarchar(100) NOT NULL,
 	Unit integer NOT NULL,
