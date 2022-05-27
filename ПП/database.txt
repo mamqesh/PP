@@ -1,0 +1,31 @@
+Create database danil3
+GO
+Use danil3
+GO
+CREATE TABLE [Unit] (
+	UnitID integer PRIMARY KEY NOT NULL,
+	UnitName nvarchar(50) NOT NULL
+)
+GO
+CREATE TABLE [Image] (
+	ImageID integer PRIMARY KEY NOT NULL,
+	[Image] image NOT NULL,
+
+)
+GO
+CREATE TABLE [Product] (
+	ProductID integer NOT NULL,
+	ProductNumber nvarchar(25) NOT NULL,
+	ProductName nvarchar(100) NOT NULL,
+	[Count] nvarchar(100) NOT NULL,
+	Unit integer NOT NULL,
+	ProductNote nvarchar(255) NOT NULL,
+	[Image] integer,
+	FOREIGN KEY (Unit) REFERENCES Unit(UnitID),
+	FOREIGN KEY ([Image]) REFERENCES [Image](ImageID)
+)
+GO
+INSERT INTO Unit (UnitID, UnitName) VALUES 
+('1',N'шт.'),
+('2',N'п/м')
+GO
