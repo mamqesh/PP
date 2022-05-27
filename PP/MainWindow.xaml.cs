@@ -20,9 +20,14 @@ namespace PP
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static Pages.mainPage pageMainPage;
+        public static MainWindow Instance;
         public MainWindow()
         {
             InitializeComponent();
+            Instance = this;
+            pageMainPage = new Pages.mainPage();
+            MainFrame.Navigate(pageMainPage);
         }
     }
 }
