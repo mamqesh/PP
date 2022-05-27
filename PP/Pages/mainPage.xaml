@@ -27,41 +27,43 @@
                         <RowDefinition Height="29*"/>
                         <RowDefinition Height="181*"/>
                     </Grid.RowDefinitions>
-                    <TextBox HorizontalAlignment="Left" Height="62" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="646"
+                    <TextBox Name="textBoxIDProduct" HorizontalAlignment="Left" Height="62" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="646"
                              materialDesign:HintAssist.Hint="ID" FontSize="20"
                              Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Row="1"/>
-                    <TextBox HorizontalAlignment="Left" Height="62" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="646"
+                    <TextBox Name="textBoxNumberProduct" HorizontalAlignment="Left" Height="62" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="646"
                         materialDesign:HintAssist.Hint="Номер продукции" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Row="2"/>
-                    <TextBox HorizontalAlignment="Left" Height="62" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="646"
+                    <TextBox Name="textBoxNameProduct" HorizontalAlignment="Left" Height="62" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="646"
                         materialDesign:HintAssist.Hint="Наименование продукции" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Row="3"/>
-                    <TextBox HorizontalAlignment="Left" Height="62" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="346"
+                    <TextBox Name="textBoxCountProduct" HorizontalAlignment="Left" Height="62" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="346"
                         materialDesign:HintAssist.Hint="Количество" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Row="4"/>
-                    <ComboBox Name="comboBoxUnitName" ItemsSource="{Binding }" HorizontalAlignment="Left" Margin="392,10,0,0" Grid.Row="4" VerticalAlignment="Top" Width="264" Height="67"
+                    <ComboBox Name="comboBoxUnitName" ItemsSource="{Binding units}" SelectedItem="{Binding product.Unit1}" HorizontalAlignment="Left" Margin="392,10,0,0" Grid.Row="4" VerticalAlignment="Top" Width="264" Height="67"
                               materialDesign:HintAssist.Hint="Ед. измерения" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                        <ComboBoxItem>
+                        <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock>
                                     <Run Text="{Binding UnitName}"/>
                                 </TextBlock>
                             </DataTemplate>
-                        </ComboBoxItem>
+                        </ComboBox.ItemTemplate>
                         </ComboBox>
-                        <TextBox HorizontalAlignment="Left" Height="62" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="646"
+                        <TextBox Name="textBoxNoteProduct" HorizontalAlignment="Left" Height="62" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="646"
                         materialDesign:HintAssist.Hint="Примечания" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Row="5"/>
                     <Button Content="ДОБАВИТЬ" HorizontalAlignment="Left" Margin="392,10,0,0" Grid.Row="6" VerticalAlignment="Top"
-                            Width="264" Height="73" FontSize="20"/>
+                            Width="264" Height="73" FontSize="20" Click="Button_Click"/>
                 </Grid>
 
+            </TabItem>
+            <TabItem Header="ДАННЫЕ ЗА ПЕРИОД">
+                <Grid Background="White"/>
             </TabItem>
             <TabItem Header="РАЗНОЕ">
                 <Grid Background="White"/>
             </TabItem>
-
         </TabControl>
     </Grid>
 </Page>
