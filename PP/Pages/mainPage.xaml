@@ -53,9 +53,12 @@
                     <TextBox Name="textBoxNoteProduct" HorizontalAlignment="Left" Height="62" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="646"
                         materialDesign:HintAssist.Hint="Примечания" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Row="5"/>
-                    <Button Content="ДОБАВИТЬ" HorizontalAlignment="Left" Margin="392,10,0,0" Grid.Row="6" VerticalAlignment="Top"
+                    <Button Content="ДОБАВИТЬ ПРОДУКТ" HorizontalAlignment="Left" Margin="392,10,0,0" Grid.Row="6" VerticalAlignment="Top"
                             Width="264" Height="73" FontSize="20" Click="Button_Click"/>
+                    <Image Grid.Column="1" Margin="424,47,318,332" Grid.Row="2" Source="/PP;component/pngwing.com (2).png" Stretch="Fill" Grid.RowSpan="5"/>
                     <Image Grid.Column="1" HorizontalAlignment="Left" Height="856" Margin="10,10,0,0" Grid.RowSpan="6" VerticalAlignment="Top" Width="1234" Grid.Row="1"/>
+                    <Button Content="ДОБАВИТЬ ИЗОБРАЖЕНИЕ" HorizontalAlignment="Left" Margin="942,458,0,0" Grid.Row="6" VerticalAlignment="Top"
+                        Width="302" Height="75" FontSize="18" Grid.Column="1" Click="Button_Click_1"/>
                 </Grid>
 
             </TabItem>
