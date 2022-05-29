@@ -37,11 +37,12 @@ namespace PP.Pages
 
         void LoadProductID()
         {
-            int productID = connection.Product.ToList().Count() + 1;
+            int productID = connection.Product.ToList().Count()+1;
             textBoxIDProduct.Text = productID.ToString();
         }
         private void Button_Click(object sender, RoutedEventArgs e)//ДОБАВИТЬ ПРОДУКЦИЮ
         {
+            string idProduct = textBoxIDProduct.Text.Trim();
             string numberProduct = textBoxNumberProduct.Text.Trim();
             string nameProduct = textBoxNameProduct.Text.Trim();
             string countProduct = textBoxCountProduct.Text.Trim();
@@ -57,7 +58,7 @@ namespace PP.Pages
                 textBoxCountProduct.Clear();
                 textBoxNoteProduct.Clear();
             }
-            if (numberProduct.Length == 0 || nameProduct.Length == 0||countProduct.Length==0||noteProduct.Length==0)
+            if (numberProduct.Length == 0 || nameProduct.Length == 0||countProduct.Length==0)
             {
                 MessageBox.Show("Не все данные введенны");
                 return;
@@ -65,7 +66,23 @@ namespace PP.Pages
             else
             {
                 Database.Product product = new Database.Product();
-                
+                product.ProductID = int.Parse(idProduct);
+                product.ProductNumber = numberProduct;
+                product.ProductName = nameProduct;
+                product.Count = countProduct;
+                product.Unit1 = comboBoxUnitName.SelectedItem as Unit;
+                product.ProductNote = noteProduct;
+                product.Image = 1;
+                int result = connection.SaveChanges();
+                if (result == 1)
+                {
+                    ClearText();
+                    MessageBox.Show("Данные добавлены");
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка добавления");
+                }
             }
         }
     }

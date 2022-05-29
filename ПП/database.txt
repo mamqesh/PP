@@ -30,3 +30,5 @@ INSERT INTO Unit (UnitID, UnitName) VALUES
 ('1',N'шт.'),
 ('2',N'п/м')
 GO
+INSERT INTO [Image] (ImageID, [Image]) VALUES
+(1,'1')
