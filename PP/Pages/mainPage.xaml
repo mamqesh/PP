@@ -67,13 +67,18 @@
             <TabItem Header="ДАННЫЕ ЗА ПЕРИОД">
                 <Grid Background="White">
                     <ListView Name="listViewProducts"  Height="764"  Margin="488,204,0,64"
-                              ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Center" Width="1432">
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Center" Width="1432" >
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Focusable" Value="False"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
                         <ListView.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
                             </ItemsPanelTemplate>
                         </ListView.ItemsPanel>
-                        <ListView.ItemTemplate>
+                        <ListView.ItemTemplate >
                             <DataTemplate>
                                 <Grid Margin="20" Width="400">
                                     <Grid.RowDefinitions>

@@ -125,12 +125,13 @@ namespace PP.Pages
         private void textBoxSearchProduct_TextChanged(object sender, TextChangedEventArgs e)//ПОИСК 
         {
             TextBox textBox = sender as TextBox;
-            if (textBox!=null)
+            if (textBox != null)
             {
                 var textForSearch = textBoxSearchProduct.Text.Trim();
                 products = connection.Product.Where(p => DbFunctions.Like(p.ProductName, "%" + textForSearch + "%") || DbFunctions.Like(p.ProductNumber, "%" + textForSearch + "%")).ToList();
                 LoadProductsInListView();
             }
+
         }
     }
 }
