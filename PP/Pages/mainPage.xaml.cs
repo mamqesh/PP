@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.Entity;
 using PP.Database;
 
 namespace PP.Pages
@@ -25,16 +26,26 @@ namespace PP.Pages
         danil3Entities connection = new danil3Entities();
         public List<Database.Unit> units { get; set; }
         public Database.Product product { get; set; }
+        public List<Database.Product> products { get; set; }
 
         public mainPage()
         {
             InitializeComponent();
             LoadProductID();
-            units = connection.Unit.ToList();
+            LoadUnits();
+            LoadProductsInListView();
             DataContext = this;
             
         }
-
+        void LoadUnits()
+        {
+            units = connection.Unit.ToList();
+        }
+        void LoadProductsInListView()
+        {
+            var currentProduct = connection.Product.ToList();
+            listViewProducts.ItemsSource = currentProduct;
+        }
         void LoadProductID()
         {
             int productID = connection.Product.ToList().Count()+1;
@@ -72,7 +83,7 @@ namespace PP.Pages
                 product.Count = countProduct;
                 product.Unit1 = comboBoxUnitName.SelectedItem as Unit;
                 product.ProductNote = noteProduct;
-                product.Image = 1;
+                //product.Image = 1;
                 int result = connection.SaveChanges();
                 if (result == 1)
                 {
@@ -99,6 +110,27 @@ namespace PP.Pages
         private void Button_Click_3(object sender, RoutedEventArgs e)//УДАЛИТЬ ИЗОБРАЖЕНИЕ
         {
 
+        }
+
+        private void ImageSource_BadgeChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)//ОБНОВИТЬ
+        {
+            LoadProductsInListView();
+        }
+
+        private void textBoxSearchProduct_TextChanged(object sender, TextChangedEventArgs e)//ПОИСК 
+        {
+            TextBox textBox = sender as TextBox;
+            if (textBox!=null)
+            {
+                var textForSearch = textBoxSearchProduct.Text.Trim();
+                products = connection.Product.Where(p => DbFunctions.Like(p.ProductName, "%" + textForSearch + "%") || DbFunctions.Like(p.ProductNumber, "%" + textForSearch + "%")).ToList();
+                LoadProductsInListView();
+            }
         }
     }
 }

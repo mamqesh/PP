@@ -55,29 +55,64 @@
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Row="5"/>
                     <Button Content="ДОБАВИТЬ ПРОДУКТ" HorizontalAlignment="Left" Margin="392,10,0,0" Grid.Row="6" VerticalAlignment="Top"
                             Width="264" Height="73" FontSize="20" Click="Button_Click"/>
-                    <Image Grid.Column="1" Margin="424,47,318,332" Grid.Row="2" Source="/PP;component/pngwing.com (2).png" Stretch="Fill" Grid.RowSpan="5"/>
-                    <Image Grid.Column="1" HorizontalAlignment="Left" Height="856" Margin="10,10,0,0" Grid.RowSpan="6" VerticalAlignment="Top" Width="1234" Grid.Row="1"/>
-                    <Button Content="ДОБАВИТЬ ИЗОБРАЖЕНИЕ" HorizontalAlignment="Left" Margin="942,458,0,0" Grid.Row="6" VerticalAlignment="Top"
+                    <Image Grid.Column="1" Margin="424,72,318,394" Grid.Row="1" Source="/PP;component/pngwing.com (2).png" Stretch="Fill" Grid.RowSpan="6"/>
+                    <Image Grid.Column="1" HorizontalAlignment="Left" Height="718" Margin="10,10,0,0" Grid.RowSpan="6" VerticalAlignment="Top" Width="1234" Grid.Row="1"/>
+                    <Button Content="ДОБАВИТЬ ИЗОБРАЖЕНИЕ" HorizontalAlignment="Left" Margin="942,378,0,0" Grid.Row="6" VerticalAlignment="Top"
                         Width="302" Height="75" FontSize="18" Grid.Column="1" Click="Button_Click_1"/>
-                    <Button Content="УДАЛИТЬ ИЗОБРАЖЕНИЕ" HorizontalAlignment="Left" Margin="634,458,0,0" Grid.Row="6" VerticalAlignment="Top"
+                    <Button Content="УДАЛИТЬ ИЗОБРАЖЕНИЕ" HorizontalAlignment="Left" Margin="634,378,0,0" Grid.Row="6" VerticalAlignment="Top"
                         Width="302" Height="75" FontSize="18" Grid.Column="1" Click="Button_Click_3"/>
                 </Grid>
 
             </TabItem>
             <TabItem Header="ДАННЫЕ ЗА ПЕРИОД">
                 <Grid Background="White">
-                    <ListView Name="listViewProducts" HorizontalAlignment="Left" Height="764" VerticalAlignment="Top" Width="1900" Margin="10,140,0,0">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn/>
-                            </GridView>
-                        </ListView.View>
+                    <ListView Name="listViewProducts"  Height="764"  Margin="488,204,0,64"
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Center" Width="1432">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="20" Width="400">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="70"/>
+                                        <RowDefinition Height="310"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Image Width="400" Grid.Row="1" Stretch="UniformToFill" HorizontalAlignment="Center" Margin="5">
+                                        <Image.Source>
+                                            <Binding Path="Image1">
+                                                <Binding.TargetNullValue>
+                                                    <ImageSource>/PP;component/pngwing.com (2).png</ImageSource>
+                                                </Binding.TargetNullValue>
+                                            </Binding>
+                                        </Image.Source>
+                                    </Image>
+                                    <TextBlock Text="{Binding ProductName}" VerticalAlignment="Center" TextAlignment="Center"  Width="390" TextWrapping="Wrap"
+                                               HorizontalAlignment="Center" Margin="5 5" FontSize="20"
+                                               Grid.Row="0"/>
+                                    <TextBlock Text="{Binding ProductNumber}" Grid.Row="2" Margin="5 5 5 15" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"/>
+                                    <TextBlock  Grid.Row="3" FontSize="15" HorizontalAlignment="Right">
+                                        <Run Text="{Binding Count, StringFormat={}На складе: {0}}"/>
+                                        <Run Text="{Binding Unit1.UnitName}"/>
+                                    </TextBlock>
+                                    <TextBlock Text="{Binding ProductNote}" Grid.Row="3" FontSize="15" HorizontalAlignment="Left"/>
+
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
                     </ListView>
                     <DatePicker Name="dataPickerStartDate" HorizontalAlignment="Left" Margin="48,31,0,0" VerticalAlignment="Top" RenderTransformOrigin="-12.9,0.64" Height="80" Width="360"
                                 materialDesign:HintAssist.Hint="Начало промежутка" FontSize="25" Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
                     <DatePicker Name="dataPickerEndDate" HorizontalAlignment="Left" Margin="488,31,0,0" VerticalAlignment="Top" RenderTransformOrigin="-12.9,0.64" Height="80" Width="360"
                                 materialDesign:HintAssist.Hint="Конец промежутка" FontSize="25" Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
                     <Button Content="ПОКАЗАТЬ ДАННЫЕ" HorizontalAlignment="Left" FontSize="20" Margin="909,31,0,0" VerticalAlignment="Top" Width="293" Height="80" Click="Button_Click_2"/>
+                    <TextBox Name="textBoxSearchProduct" Margin="48,204,1512,762" TextWrapping="Wrap" 
+                             materialDesign:HintAssist.Hint="Поиск продукта" FontSize="20" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="360" TextChanged="textBoxSearchProduct_TextChanged"/>
+                    <Button Content="ОБНОВИТЬ" HorizontalAlignment="Left" FontSize="20" Margin="1207,31,0,0" VerticalAlignment="Top" Width="293" Height="80" Click="Button_Click_4"/>
                 </Grid>
             </TabItem>
             <TabItem Header="РАЗНОЕ">

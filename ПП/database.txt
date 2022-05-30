@@ -20,7 +20,7 @@ CREATE TABLE [Product] (
 	ProductName nvarchar(100) NOT NULL,
 	[Count] nvarchar(100) NOT NULL,
 	Unit integer NOT NULL,
-	ProductNote nvarchar(255) NOT NULL,
+	ProductNote nvarchar(255),
 	[Image] integer,
 	FOREIGN KEY (Unit) REFERENCES Unit(UnitID),
 	FOREIGN KEY ([Image]) REFERENCES [Image](ImageID)
