@@ -60,7 +60,7 @@
                     <Button Content="ДОБАВИТЬ ИЗОБРАЖЕНИЕ" HorizontalAlignment="Left" Margin="942,458,0,0" Grid.Row="6" VerticalAlignment="Top"
                         Width="302" Height="75" FontSize="18" Grid.Column="1" Click="Button_Click_1"/>
                     <Button Content="УДАЛИТЬ ИЗОБРАЖЕНИЕ" HorizontalAlignment="Left" Margin="634,458,0,0" Grid.Row="6" VerticalAlignment="Top"
-                        Width="302" Height="75" FontSize="18" Grid.Column="1"/>
+                        Width="302" Height="75" FontSize="18" Grid.Column="1" Click="Button_Click_3"/>
                 </Grid>
 
             </TabItem>
@@ -77,7 +77,7 @@
                                 materialDesign:HintAssist.Hint="Начало промежутка" FontSize="25" Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
                     <DatePicker Name="dataPickerEndDate" HorizontalAlignment="Left" Margin="488,31,0,0" VerticalAlignment="Top" RenderTransformOrigin="-12.9,0.64" Height="80" Width="360"
                                 materialDesign:HintAssist.Hint="Конец промежутка" FontSize="25" Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
-                    <Button Content="ПОКАЗАТЬ ДАННЫЕ" HorizontalAlignment="Left" FontSize="20" Margin="909,31,0,0" VerticalAlignment="Top" Width="293" Height="80"/>
+                    <Button Content="ПОКАЗАТЬ ДАННЫЕ" HorizontalAlignment="Left" FontSize="20" Margin="909,31,0,0" VerticalAlignment="Top" Width="293" Height="80" Click="Button_Click_2"/>
                 </Grid>
             </TabItem>
             <TabItem Header="РАЗНОЕ">
