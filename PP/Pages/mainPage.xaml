@@ -59,11 +59,26 @@
                     <Image Grid.Column="1" HorizontalAlignment="Left" Height="856" Margin="10,10,0,0" Grid.RowSpan="6" VerticalAlignment="Top" Width="1234" Grid.Row="1"/>
                     <Button Content="ДОБАВИТЬ ИЗОБРАЖЕНИЕ" HorizontalAlignment="Left" Margin="942,458,0,0" Grid.Row="6" VerticalAlignment="Top"
                         Width="302" Height="75" FontSize="18" Grid.Column="1" Click="Button_Click_1"/>
+                    <Button Content="УДАЛИТЬ ИЗОБРАЖЕНИЕ" HorizontalAlignment="Left" Margin="634,458,0,0" Grid.Row="6" VerticalAlignment="Top"
+                        Width="302" Height="75" FontSize="18" Grid.Column="1"/>
                 </Grid>
 
             </TabItem>
             <TabItem Header="ДАННЫЕ ЗА ПЕРИОД">
-                <Grid Background="White"/>
+                <Grid Background="White">
+                    <ListView Name="listViewProducts" HorizontalAlignment="Left" Height="764" VerticalAlignment="Top" Width="1900" Margin="10,140,0,0">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <DatePicker Name="dataPickerStartDate" HorizontalAlignment="Left" Margin="48,31,0,0" VerticalAlignment="Top" RenderTransformOrigin="-12.9,0.64" Height="80" Width="360"
+                                materialDesign:HintAssist.Hint="Начало промежутка" FontSize="25" Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
+                    <DatePicker Name="dataPickerEndDate" HorizontalAlignment="Left" Margin="488,31,0,0" VerticalAlignment="Top" RenderTransformOrigin="-12.9,0.64" Height="80" Width="360"
+                                materialDesign:HintAssist.Hint="Конец промежутка" FontSize="25" Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
+                    <Button Content="ПОКАЗАТЬ ДАННЫЕ" HorizontalAlignment="Left" FontSize="20" Margin="909,31,0,0" VerticalAlignment="Top" Width="293" Height="80"/>
+                </Grid>
             </TabItem>
             <TabItem Header="РАЗНОЕ">
                 <Grid Background="White"/>
