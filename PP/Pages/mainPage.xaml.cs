@@ -45,6 +45,11 @@ namespace PP.Pages
         {
             var currentProduct = connection.Product.ToList();
             listViewProducts.ItemsSource = currentProduct;
+            //int countSymbol = textBlockProductNote.Text.Trim();
+            //if (countSymbol.Length>10)
+            //{
+            //    textBlockProductNote.Text = +"\t";
+            //}
         }
         void LoadProductID()
         {

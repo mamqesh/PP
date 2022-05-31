@@ -87,7 +87,7 @@
                                         <RowDefinition Height="auto"/>
                                         <RowDefinition Height="auto"/>
                                     </Grid.RowDefinitions>
-                                    <Image Width="400" Grid.Row="1" Stretch="UniformToFill" HorizontalAlignment="Center" Margin="5">
+                                    <Image Width="400" Grid.Row="1" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1">
                                         <Image.Source>
                                             <Binding Path="Image1">
                                                 <Binding.TargetNullValue>
@@ -100,12 +100,11 @@
                                                HorizontalAlignment="Center" Margin="5 5" FontSize="20"
                                                Grid.Row="0"/>
                                     <TextBlock Text="{Binding ProductNumber}" Grid.Row="2" Margin="5 5 5 15" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"/>
-                                    <TextBlock  Grid.Row="3" FontSize="15" HorizontalAlignment="Right">
+                                    <TextBlock  Grid.Row="3" FontSize="15" HorizontalAlignment="Left">
                                         <Run Text="{Binding Count, StringFormat={}На складе: {0}}"/>
                                         <Run Text="{Binding Unit1.UnitName}"/>
                                     </TextBlock>
-                                    <TextBlock Text="{Binding ProductNote}" Grid.Row="3" FontSize="15" HorizontalAlignment="Left"/>
-
+                                    <TextBlock Name="textBlockProductNote" Text="{Binding ProductNote}" Grid.Row="3" FontSize="15" HorizontalAlignment="Left" Margin="1,50"/>
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
