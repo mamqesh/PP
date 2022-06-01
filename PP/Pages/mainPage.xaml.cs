@@ -88,7 +88,8 @@ namespace PP.Pages
                 product.Count = countProduct;
                 product.Unit1 = comboBoxUnitName.SelectedItem as Unit;
                 product.ProductNote = noteProduct;
-                //product.Image = 1;
+                product.Image = 1;
+                connection.Product.Add(product);
                 int result = connection.SaveChanges();
                 if (result == 1)
                 {
@@ -134,7 +135,8 @@ namespace PP.Pages
             {
                 var textForSearch = textBoxSearchProduct.Text.Trim();
                 products = connection.Product.Where(p => DbFunctions.Like(p.ProductName, "%" + textForSearch + "%") || DbFunctions.Like(p.ProductNumber, "%" + textForSearch + "%")).ToList();
-                LoadProductsInListView();
+                listViewProducts.ItemsSource = products;
+                //LoadProductsInListView();
             }
 
         }

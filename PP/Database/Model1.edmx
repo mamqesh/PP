@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище danil3Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище danilModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Image">
           <Key>
             <PropertyRef Name="ImageID" />
@@ -22,8 +22,18 @@
           <Property Name="ProductName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Count" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Unit" Type="int" Nullable="false" />
-          <Property Name="ProductNote" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ProductNote" Type="nvarchar" MaxLength="255" />
           <Property Name="Image" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Unit">
           <Key>
@@ -32,7 +42,7 @@
           <Property Name="UnitID" Type="int" Nullable="false" />
           <Property Name="UnitName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Product__Image__29572725">
+        <Association Name="FK__Product__Image__07C12930">
           <End Role="Image" Type="Self.Image" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -44,7 +54,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Product__Unit__286302EC">
+        <Association Name="FK__Product__Unit__06CD04F7">
           <End Role="Unit" Type="Self.Unit" Multiplicity="1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -56,15 +66,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Хранилище danil3ModelContainer">
+        <EntityContainer Name="Хранилище danilModelContainer">
           <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Unit" EntityType="Self.Unit" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Product__Image__29572725" Association="Self.FK__Product__Image__29572725">
+          <AssociationSet Name="FK__Product__Image__07C12930" Association="Self.FK__Product__Image__07C12930">
             <End Role="Image" EntitySet="Image" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK__Product__Unit__286302EC" Association="Self.FK__Product__Unit__286302EC">
+          <AssociationSet Name="FK__Product__Unit__06CD04F7" Association="Self.FK__Product__Unit__06CD04F7">
             <End Role="Unit" EntitySet="Unit" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
@@ -73,14 +84,14 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="danil3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="danilModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Image">
           <Key>
             <PropertyRef Name="ImageID" />
           </Key>
           <Property Name="ImageID" Type="Int32" Nullable="false" />
           <Property Name="Image1" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="Self.FK__Product__Image__29572725" FromRole="Image" ToRole="Product" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Product__Image__07C12930" FromRole="Image" ToRole="Product" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -92,10 +103,20 @@
           <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Count" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Unit" Type="Int32" Nullable="false" />
-          <Property Name="ProductNote" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductNote" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Image" Type="Int32" />
-          <NavigationProperty Name="Image1" Relationship="Self.FK__Product__Image__29572725" FromRole="Product" ToRole="Image" />
-          <NavigationProperty Name="Unit1" Relationship="Self.FK__Product__Unit__286302EC" FromRole="Product" ToRole="Unit" />
+          <NavigationProperty Name="Image1" Relationship="Self.FK__Product__Image__07C12930" FromRole="Product" ToRole="Image" />
+          <NavigationProperty Name="Unit1" Relationship="Self.FK__Product__Unit__06CD04F7" FromRole="Product" ToRole="Unit" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Unit">
           <Key>
@@ -103,9 +124,9 @@
           </Key>
           <Property Name="UnitID" Type="Int32" Nullable="false" />
           <Property Name="UnitName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="Self.FK__Product__Unit__286302EC" FromRole="Unit" ToRole="Product" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Product__Unit__06CD04F7" FromRole="Unit" ToRole="Product" />
         </EntityType>
-        <Association Name="FK__Product__Image__29572725">
+        <Association Name="FK__Product__Image__07C12930">
           <End Role="Image" Type="Self.Image" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -117,7 +138,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Product__Unit__286302EC">
+        <Association Name="FK__Product__Unit__06CD04F7">
           <End Role="Unit" Type="Self.Unit" Multiplicity="1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -132,12 +153,13 @@
         <EntityContainer Name="danil3Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Image" EntityType="Self.Image" />
           <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Unit" EntityType="Self.Unit" />
-          <AssociationSet Name="FK__Product__Image__29572725" Association="Self.FK__Product__Image__29572725">
+          <AssociationSet Name="FK__Product__Image__07C12930" Association="Self.FK__Product__Image__07C12930">
             <End Role="Image" EntitySet="Image" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK__Product__Unit__286302EC" Association="Self.FK__Product__Unit__286302EC">
+          <AssociationSet Name="FK__Product__Unit__06CD04F7" Association="Self.FK__Product__Unit__06CD04F7">
             <End Role="Unit" EntitySet="Unit" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
@@ -147,9 +169,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище danil3ModelContainer" CdmEntityContainer="danil3Entities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище danilModelContainer" CdmEntityContainer="danil3Entities">
           <EntitySetMapping Name="Image">
-            <EntityTypeMapping TypeName="danil3Model.Image">
+            <EntityTypeMapping TypeName="danilModel.Image">
               <MappingFragment StoreEntitySet="Image">
                 <ScalarProperty Name="ImageID" ColumnName="ImageID" />
                 <ScalarProperty Name="Image1" ColumnName="Image" />
@@ -157,7 +179,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Product">
-            <EntityTypeMapping TypeName="danil3Model.Product">
+            <EntityTypeMapping TypeName="danilModel.Product">
               <MappingFragment StoreEntitySet="Product">
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="ProductNumber" ColumnName="ProductNumber" />
@@ -169,8 +191,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="danilModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Unit">
-            <EntityTypeMapping TypeName="danil3Model.Unit">
+            <EntityTypeMapping TypeName="danilModel.Unit">
               <MappingFragment StoreEntitySet="Unit">
                 <ScalarProperty Name="UnitID" ColumnName="UnitID" />
                 <ScalarProperty Name="UnitName" ColumnName="UnitName" />
