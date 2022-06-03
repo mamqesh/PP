@@ -48,6 +48,8 @@ namespace PP.Pages
         {
             var currentProduct = connection.Product.ToList();
             listViewProducts.ItemsSource = currentProduct;
+
+
             //int countSymbol = textBlockProductNote.Text.Trim();
             //if (countSymbol.Length>10)
             //{
@@ -61,49 +63,66 @@ namespace PP.Pages
         }
         private void Button_Click(object sender, RoutedEventArgs e)//ДОБАВИТЬ ПРОДУКЦИЮ
         {
-            string idProduct = textBoxIDProduct.Text.Trim();
-            string numberProduct = textBoxNumberProduct.Text.Trim();
-            string nameProduct = textBoxNameProduct.Text.Trim();
-            string countProduct = textBoxCountProduct.Text.Trim();
-            string noteProduct = textBoxNoteProduct.Text.Trim();
-            void ClearText()
+            if (textBoxCountProduct.Text.Length > 0 && textBoxIDProduct.Text.Length > 0 && textBoxNumberProduct.Text.Length > 0 && textBoxNameProduct.Text.Length > 0)
             {
-                numberProduct = "";
-                nameProduct = "";
-                countProduct = "";
-                noteProduct = "";
-                textBoxNumberProduct.Clear();
-                textBoxNameProduct.Clear();
-                textBoxCountProduct.Clear();
-                textBoxNoteProduct.Clear();
-            }
-            if (numberProduct.Length == 0 || nameProduct.Length == 0||countProduct.Length==0)
-            {
-                MessageBox.Show("Не все данные введенны");
-                return;
-            }
-            else
-            {
-                Database.Product product = new Database.Product();
-                product.ProductID = int.Parse(idProduct);
-                product.ProductNumber = numberProduct;
-                product.ProductName = nameProduct;
-                product.Count = countProduct;
-                product.Unit1 = comboBoxUnitName.SelectedItem as Unit;
-                product.ProductNote = noteProduct;
-                product.Image = 1;
-                connection.Product.Add(product);
-                int result = connection.SaveChanges();
-                if (result == 1)
+                if (comboBoxUnitName.SelectedIndex!=-1)
                 {
-                    ClearText();
-                    MessageBox.Show("Данные добавлены");
+                    string idProduct = textBoxIDProduct.Text.Trim();
+                    string numberProduct = textBoxNumberProduct.Text.Trim();
+                    string nameProduct = textBoxNameProduct.Text.Trim();
+                    string countProduct = textBoxCountProduct.Text.Trim();
+                    string noteProduct = textBoxNoteProduct.Text.Trim();
+                    void ClearText()
+                    {
+                        numberProduct = "";
+                        nameProduct = "";
+                        countProduct = "";
+                        noteProduct = "";
+                        textBoxNumberProduct.Clear();
+                        textBoxNameProduct.Clear();
+                        textBoxCountProduct.Clear();
+                        textBoxNoteProduct.Clear();
+                        comboBoxUnitName.SelectedIndex = -1;
+                    }
+                    if (numberProduct.Length == 0 || nameProduct.Length == 0 || countProduct.Length == 0)
+                    {
+                        MessageBox.Show("Не все данные введенны");
+                        return;
+                    }
+                    else
+                    {
+                        Database.Product product = new Database.Product();
+                        product.ProductID = int.Parse(idProduct);
+                        product.ProductNumber = numberProduct;
+                        product.ProductName = nameProduct;
+                        product.Count = countProduct;
+                        product.Unit1 = comboBoxUnitName.SelectedItem as Unit;
+                        product.ProductNote = noteProduct;
+                        product.Image = 1;
+                        connection.Product.Add(product);
+                        int result = connection.SaveChanges();
+                        if (result == 1)
+                        {
+                            ClearText();
+                            LoadProductID();
+                            MessageBox.Show("Данные добавлены");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Ошибка добавления");
+                        }
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Ошибка добавления");
+                    MessageBox.Show("Единица измерения не выбрана");
                 }
             }
+            else
+            {
+                MessageBox.Show("Не все поля заполнены");
+            }
+         
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)//ДОБАВИТЬ ИЗОБРАЖНИЕ
@@ -145,24 +164,23 @@ namespace PP.Pages
             if (result!=0)
             {
                 MessageBox.Show("Изображение добавлено");
+
+
             }
             else
             {
                 MessageBox.Show("Ошибка добавления изображения");
             }
         }
-        //void GetImageInWindow(string ID, string ByteGet)
-        //{
-        //    BitmapImage image = new BitmapImage();
-        //    image.BeginInit();
-        //    image.UriSource = new Uri(stringBuilder, UriKind.Relative);
-        //    image.EndInit();
-        //    imageProductPhoto.Source = image;
-        //    26:30
-        //}
+        void GetImageInWindow(string ID, string ByteGet)
+        {
+            byte[] imageByte = ByteGet.Split(';').Select(a => byte.Parse(a)).ToArray();
+
+           
+        }
         private void Button_Click_2(object sender, RoutedEventArgs e) //ПОКАЗАТЬ ДАННЫЕ
         {
-
+          
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)//УДАЛИТЬ ИЗОБРАЖЕНИЕ

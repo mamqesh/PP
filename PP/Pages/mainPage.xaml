@@ -55,7 +55,7 @@
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Row="5"/>
                     <Button Content="ДОБАВИТЬ ПРОДУКТ" HorizontalAlignment="Left" Margin="392,10,0,0" Grid.Row="6" VerticalAlignment="Top"
                             Width="264" Height="73" FontSize="20" Click="Button_Click"/>
-                    <Image Grid.Column="1" Margin="424,72,318,394" Grid.Row="1" Source="/PP;component/pngwing.com (2).png" Stretch="Fill" Grid.RowSpan="6"/>
+                    <Image Grid.Column="1" Margin="424,72,318,394" Grid.Row="1" Source="/Resources/picture.png" Stretch="Fill" Grid.RowSpan="6"/>
                     <Image Name="imageProductPhoto" Grid.Column="1" HorizontalAlignment="Left" Height="718" Margin="10,10,0,0" Grid.RowSpan="6" VerticalAlignment="Top" Width="1234" Grid.Row="1"/>
                     <Button Content="ДОБАВИТЬ ИЗОБРАЖЕНИЕ" HorizontalAlignment="Left" Margin="942,378,0,0" Grid.Row="6" VerticalAlignment="Top"
                         Width="302" Height="75" FontSize="18" Grid.Column="1" Click="Button_Click_1"/>
@@ -91,7 +91,7 @@
                                         <Image.Source>
                                             <Binding Path="Image1">
                                                 <Binding.TargetNullValue>
-                                                    <ImageSource>/PP;component/pngwing.com (2).png</ImageSource>
+                                                    <ImageSource>/Resources/photo.png</ImageSource>
                                                 </Binding.TargetNullValue>
                                             </Binding>
                                         </Image.Source>
