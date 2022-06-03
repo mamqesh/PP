@@ -9,7 +9,7 @@ CREATE TABLE [Unit] (
 GO
 CREATE TABLE [Image] (
 	ImageID integer PRIMARY KEY NOT NULL,
-	[Image] image NOT NULL,
+	[Image] LONGTEXT NOT NULL,
 
 )
 GO

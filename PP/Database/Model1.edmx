@@ -10,7 +10,7 @@
             <PropertyRef Name="ImageID" />
           </Key>
           <Property Name="ImageID" Type="int" Nullable="false" />
-          <Property Name="Image" Type="image" Nullable="false" />
+          <Property Name="Image" Type="text" Nullable="false" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -22,7 +22,7 @@
           <Property Name="ProductName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Count" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Unit" Type="int" Nullable="false" />
-          <Property Name="ProductNote" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ProductNote" Type="nvarchar" MaxLength="255" />
           <Property Name="Image" Type="int" />
         </EntityType>
         <EntityType Name="Unit">
@@ -79,7 +79,7 @@
             <PropertyRef Name="ImageID" />
           </Key>
           <Property Name="ImageID" Type="Int32" Nullable="false" />
-          <Property Name="Image1" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Image1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Product" Relationship="Self.FK__Product__Image__29572725" FromRole="Image" ToRole="Product" />
         </EntityType>
         <EntityType Name="Product">
@@ -92,7 +92,7 @@
           <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Count" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Unit" Type="Int32" Nullable="false" />
-          <Property Name="ProductNote" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductNote" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Image" Type="Int32" />
           <NavigationProperty Name="Image1" Relationship="Self.FK__Product__Image__29572725" FromRole="Product" ToRole="Image" />
           <NavigationProperty Name="Unit1" Relationship="Self.FK__Product__Unit__286302EC" FromRole="Product" ToRole="Unit" />

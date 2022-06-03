@@ -12,8 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
+using System.Drawing;
 using System.Data.Entity;
 using PP.Database;
+using f = System.Windows.Forms;
 
 namespace PP.Pages
 {
@@ -104,9 +107,58 @@ namespace PP.Pages
 
         private void Button_Click_1(object sender, RoutedEventArgs e)//ДОБАВИТЬ ИЗОБРАЖНИЕ
         {
+            f.OpenFileDialog openFileDialog = new f.OpenFileDialog();
+            openFileDialog.Filter = "Формат изображения | *.png; *.jpg;";
+            if (openFileDialog.ShowDialog()==f.DialogResult.OK)
+            {
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.UriSource = new Uri(openFileDialog.FileName, UriKind.Relative);
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.DecodePixelHeight = 256;
+                bitmapImage.EndInit();
+                GetImage(bitmapImage);
+            }
+        }
+        void GetImage (BitmapImage bitmapImage)
+        {
+            PngBitmapEncoder pngBitmapEncoder = new PngBitmapEncoder();
+            MemoryStream memoryStream = new MemoryStream();
+            StringBuilder stringBuilder = new StringBuilder();
+            pngBitmapEncoder.Frames.Add(BitmapFrame.Create(bitmapImage));
+            pngBitmapEncoder.Save(memoryStream);
+            byte[] imgByte = memoryStream.ToArray();
+            foreach (byte _imgByte in imgByte)
+                stringBuilder.Append(_imgByte).Append(";");
+            stringBuilder.Remove(stringBuilder.Length - 1, 1);
+            GetImageDatabase(stringBuilder.ToString());
           
         }
-
+        void GetImageDatabase(string getImage)
+        {
+            Database.Image image = new Database.Image();
+             image.ImageID = connection.Image.ToList().Count() + 1;
+            image.Image1 = getImage;
+            connection.Image.Add(image);
+            int result = connection.SaveChanges();
+            if (result!=0)
+            {
+                MessageBox.Show("Изображение добавлено");
+            }
+            else
+            {
+                MessageBox.Show("Ошибка добавления изображения");
+            }
+        }
+        //void GetImageInWindow(string ID, string ByteGet)
+        //{
+        //    BitmapImage image = new BitmapImage();
+        //    image.BeginInit();
+        //    image.UriSource = new Uri(stringBuilder, UriKind.Relative);
+        //    image.EndInit();
+        //    imageProductPhoto.Source = image;
+        //    26:30
+        //}
         private void Button_Click_2(object sender, RoutedEventArgs e) //ПОКАЗАТЬ ДАННЫЕ
         {
 

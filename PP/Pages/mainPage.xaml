@@ -56,7 +56,7 @@
                     <Button Content="ДОБАВИТЬ ПРОДУКТ" HorizontalAlignment="Left" Margin="392,10,0,0" Grid.Row="6" VerticalAlignment="Top"
                             Width="264" Height="73" FontSize="20" Click="Button_Click"/>
                     <Image Grid.Column="1" Margin="424,72,318,394" Grid.Row="1" Source="/PP;component/pngwing.com (2).png" Stretch="Fill" Grid.RowSpan="6"/>
-                    <Image Grid.Column="1" HorizontalAlignment="Left" Height="718" Margin="10,10,0,0" Grid.RowSpan="6" VerticalAlignment="Top" Width="1234" Grid.Row="1"/>
+                    <Image Name="imageProductPhoto" Grid.Column="1" HorizontalAlignment="Left" Height="718" Margin="10,10,0,0" Grid.RowSpan="6" VerticalAlignment="Top" Width="1234" Grid.Row="1"/>
                     <Button Content="ДОБАВИТЬ ИЗОБРАЖЕНИЕ" HorizontalAlignment="Left" Margin="942,378,0,0" Grid.Row="6" VerticalAlignment="Top"
                         Width="302" Height="75" FontSize="18" Grid.Column="1" Click="Button_Click_1"/>
                     <Button Content="УДАЛИТЬ ИЗОБРАЖЕНИЕ" HorizontalAlignment="Left" Margin="634,378,0,0" Grid.Row="6" VerticalAlignment="Top"

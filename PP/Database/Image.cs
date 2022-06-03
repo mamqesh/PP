@@ -21,7 +21,7 @@ namespace PP.Database
         }
     
         public int ImageID { get; set; }
-        public byte[] Image1 { get; set; }
+        public string Image1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Product { get; set; }
