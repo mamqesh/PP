@@ -27,7 +27,6 @@ namespace PP.Database
     
         public virtual DbSet<Image> Image { get; set; }
         public virtual DbSet<Product> Product { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Unit> Unit { get; set; }
     }
 }
