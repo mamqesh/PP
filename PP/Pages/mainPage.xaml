@@ -36,6 +36,7 @@
                     <TextBox Name="textBoxNameProduct" HorizontalAlignment="Left" Height="62" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="646"
                         materialDesign:HintAssist.Hint="Наименование продукции" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Row="3"/>
+                    
                     <TextBox Name="textBoxCountProduct" HorizontalAlignment="Left" Height="62" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="346"
                         materialDesign:HintAssist.Hint="Количество" FontSize="20"
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Row="4"/>

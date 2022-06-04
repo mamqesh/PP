@@ -23,7 +23,7 @@ namespace PP.Pages
     /// <summary>
     /// Логика взаимодействия для mainPage.xaml
     /// </summary>
-    
+
     public partial class mainPage : Page
     {
         danil3Entities connection = new danil3Entities();
@@ -38,7 +38,7 @@ namespace PP.Pages
             LoadUnits();
             LoadProductsInListView();
             DataContext = this;
-            
+
         }
         void LoadUnits()
         {
@@ -58,14 +58,14 @@ namespace PP.Pages
         }
         void LoadProductID()
         {
-            int productID = connection.Product.ToList().Count()+1;
+            int productID = connection.Product.ToList().Count() + 1;
             textBoxIDProduct.Text = productID.ToString();
         }
         private void Button_Click(object sender, RoutedEventArgs e)//ДОБАВИТЬ ПРОДУКЦИЮ
         {
             if (textBoxCountProduct.Text.Length > 0 && textBoxIDProduct.Text.Length > 0 && textBoxNumberProduct.Text.Length > 0 && textBoxNameProduct.Text.Length > 0)
             {
-                if (comboBoxUnitName.SelectedIndex!=-1)
+                if (comboBoxUnitName.SelectedIndex != -1)
                 {
                     string idProduct = textBoxIDProduct.Text.Trim();
                     string numberProduct = textBoxNumberProduct.Text.Trim();
@@ -122,14 +122,32 @@ namespace PP.Pages
             {
                 MessageBox.Show("Не все поля заполнены");
             }
-         
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)//ДОБАВИТЬ ИЗОБРАЖНИЕ
         {
+            //f.OpenFileDialog openFileDialog = new f.OpenFileDialog();
+            //openFileDialog.Filter = "Формат изображения | *.png; *.jpg; | All files (*.*)|*.*";
+            //if (openFileDialog.ShowDialog() == f.DialogResult.OK)
+            //{
+            //    try
+            //    {
+            //        BitmapImage bitmapImage = new BitmapImage();
+            //        bitmapImage.BeginInit();
+            //        bitmapImage.UriSource = new Uri(openFileDialog.FileName, UriKind.Relative);
+            //        bitmapImage.EndInit();
+            //        imageProductPhoto.Source = bitmapImage;
+            //    }
+            //    catch (Exception)
+            //    {
+
+            //        MessageBox.Show("Невозможно открыть выбранный файл", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    }
+            //}
             f.OpenFileDialog openFileDialog = new f.OpenFileDialog();
             openFileDialog.Filter = "Формат изображения | *.png; *.jpg;";
-            if (openFileDialog.ShowDialog()==f.DialogResult.OK)
+            if (openFileDialog.ShowDialog() == f.DialogResult.OK)
             {
                 BitmapImage bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
@@ -140,7 +158,7 @@ namespace PP.Pages
                 GetImage(bitmapImage);
             }
         }
-        void GetImage (BitmapImage bitmapImage)
+        void GetImage(BitmapImage bitmapImage)
         {
             PngBitmapEncoder pngBitmapEncoder = new PngBitmapEncoder();
             MemoryStream memoryStream = new MemoryStream();
@@ -152,20 +170,18 @@ namespace PP.Pages
                 stringBuilder.Append(_imgByte).Append(";");
             stringBuilder.Remove(stringBuilder.Length - 1, 1);
             GetImageDatabase(stringBuilder.ToString());
-          
+
         }
         void GetImageDatabase(string getImage)
         {
             Database.Image image = new Database.Image();
-             image.ImageID = connection.Image.ToList().Count() + 1;
+            image.ImageID = connection.Image.ToList().Count() + 1;
             image.Image1 = getImage;
             connection.Image.Add(image);
             int result = connection.SaveChanges();
-            if (result!=0)
+            if (result != 0)
             {
                 MessageBox.Show("Изображение добавлено");
-
-
             }
             else
             {
@@ -175,12 +191,17 @@ namespace PP.Pages
         void GetImageInWindow(string ID, string ByteGet)
         {
             byte[] imageByte = ByteGet.Split(';').Select(a => byte.Parse(a)).ToArray();
+            MemoryStream memoryStream = new MemoryStream(imageByte);
+            imageProductPhoto.Source = BitmapFrame.Create(memoryStream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+            imageProductPhoto.Style = FindResource("Image") as Style;
+            imageProductPhoto.DataContext = ID;
+            
 
-           
+
         }
         private void Button_Click_2(object sender, RoutedEventArgs e) //ПОКАЗАТЬ ДАННЫЕ
         {
-          
+
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)//УДАЛИТЬ ИЗОБРАЖЕНИЕ
