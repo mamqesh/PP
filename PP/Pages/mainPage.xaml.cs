@@ -227,7 +227,6 @@ namespace PP.Pages
                 var textForSearch = textBoxSearchProduct.Text.Trim();
                 products = connection.Product.Where(p => DbFunctions.Like(p.ProductName, "%" + textForSearch + "%") || DbFunctions.Like(p.ProductNumber, "%" + textForSearch + "%")).ToList();
                 listViewProducts.ItemsSource = products;
-                //LoadProductsInListView();
             }
 
         }

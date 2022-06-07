@@ -9,21 +9,17 @@ CREATE TABLE [Unit] (
 GO
 CREATE TABLE [Image] (
 	ImageID integer PRIMARY KEY NOT NULL,
-	[Image] LONGTEXT NOT NULL,
-
+	[Image] TEXT NOT NULL
 )
 GO
 CREATE TABLE [Product] (
-	ProductID integer NOT NULL,
-	ProductNumber nvarchar(25) NOT NULL,
-	PRIMARY KEY (ProductID,ProductNumber),
+	ProductID integer primary key NOT NULL,
+	ProductNumber nvarchar(25) ,
 	ProductName nvarchar(100) NOT NULL,
 	[Count] nvarchar(100) NOT NULL,
-	Unit integer NOT NULL,
+	Unit integer NOT NULL FOREIGN KEY REFERENCES Unit(UnitID),
 	ProductNote nvarchar(255),
-	[Image] integer,
-	FOREIGN KEY (Unit) REFERENCES Unit(UnitID),
-	FOREIGN KEY ([Image]) REFERENCES [Image](ImageID)
+	[Image] integer FOREIGN KEY REFERENCES [Image](ImageID)
 )
 GO
 INSERT INTO Unit (UnitID, UnitName) VALUES 
