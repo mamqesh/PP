@@ -63,7 +63,6 @@ namespace PP.Pages
             textBoxViewNoteProduct.GetBindingExpression(TextBox.TextProperty)?.UpdateTarget();
             comboBoxViewUnitProduct.GetBindingExpression(ComboBox.SelectedItemProperty)?.UpdateTarget();
             listBoxViewProducts.GetBindingExpression(ListBox.ItemsSourceProperty)?.UpdateTarget();
-
         }
         private void Button_Click(object sender, RoutedEventArgs e)//ДОБАВИТЬ ПРОДУКЦИЮ
         {
@@ -95,28 +94,32 @@ namespace PP.Pages
                     }
                     else
                     {
-                        Database.Product product = new Database.Product();
-                        product.ProductID = int.Parse(idProduct);
-                        product.ProductNumber = numberProduct;
-                        product.ProductName = nameProduct;
-                        product.Count = countProduct;
-                        product.Unit1 = comboBoxUnitName.SelectedItem as Unit;
-                        product.ProductNote = noteProduct;
-                        product.Image = 1;
-                        connection.Product.Add(product);
-                        int result = connection.SaveChanges();
-                        if (result == 1)
+                        try
                         {
-                            ClearText();
-                            LoadProductID();
-                            LoadProductsInListView(); 
-                            products = connection.Product.ToList();
-                            LoadProducts();
-                            MessageBox.Show("Данные добавлены");
+                            Database.Product product = new Database.Product();
+                            product.ProductID = int.Parse(idProduct);
+                            product.ProductNumber = numberProduct;
+                            product.ProductName = nameProduct;
+                            product.Count = countProduct;
+                            product.Unit1 = comboBoxUnitName.SelectedItem as Unit;
+                            product.ProductNote = noteProduct;
+                            product.Image = 1;
+                            connection.Product.Add(product);
+                            int result = connection.SaveChanges();
+                            if (result == 1)
+                            {
+                                ClearText();
+                                LoadProductID();
+                                LoadProductsInListView();
+                                products = connection.Product.ToList();
+                                LoadProducts();
+                                MessageBox.Show("Данные добавлены");
+                            }
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            MessageBox.Show("Ошибка добавления");
+
+                            MessageBox.Show(ex.Message.ToString());
                         }
                     }
                 }
@@ -134,24 +137,6 @@ namespace PP.Pages
 
         private void Button_Click_1(object sender, RoutedEventArgs e)//ДОБАВИТЬ ИЗОБРАЖНИЕ
         {
-            //f.OpenFileDialog openFileDialog = new f.OpenFileDialog();
-            //openFileDialog.Filter = "Формат изображения | *.png; *.jpg; | All files (*.*)|*.*";
-            //if (openFileDialog.ShowDialog() == f.DialogResult.OK)
-            //{
-            //    try
-            //    {
-            //        BitmapImage bitmapImage = new BitmapImage();
-            //        bitmapImage.BeginInit();
-            //        bitmapImage.UriSource = new Uri(openFileDialog.FileName, UriKind.Relative);
-            //        bitmapImage.EndInit();
-            //        imageProductPhoto.Source = bitmapImage;
-            //    }
-            //    catch (Exception)
-            //    {
-
-            //        MessageBox.Show("Невозможно открыть выбранный файл", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    }
-            //}
             f.OpenFileDialog openFileDialog = new f.OpenFileDialog();
             openFileDialog.Filter = "Формат изображения | *.png; *.jpg;";
             if (openFileDialog.ShowDialog() == f.DialogResult.OK)
@@ -183,18 +168,22 @@ namespace PP.Pages
         }
         void GetImageDatabase(string getImage)
         {
-            Database.Image image = new Database.Image();
-            image.ImageID = connection.Image.ToList().Count() + 1;
-            image.Image1 = getImage;
-            connection.Image.Add(image);
-            int result = connection.SaveChanges();
-            if (result != 0)
+            try
             {
-                MessageBox.Show("Изображение добавлено");
+                Database.Image image = new Database.Image();
+                image.ImageID = connection.Image.ToList().Count() + 1;
+                image.Image1 = getImage;
+                connection.Image.Add(image);
+                int result = connection.SaveChanges();
+                if (result != 0)
+                {
+                    MessageBox.Show("Изображение добавлено");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Ошибка добавления изображения");
+
+                MessageBox.Show(ex.Message.ToString());
             }
         }
         void GetImageInWindow(string ID, string ByteGet)
@@ -204,30 +193,19 @@ namespace PP.Pages
             imageProductPhoto.Source = BitmapFrame.Create(memoryStream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
             imageProductPhoto.Style = FindResource("Image") as Style;
             imageProductPhoto.DataContext = ID;
-
-
-
         }
-        private void Button_Click_2(object sender, RoutedEventArgs e) //ПОКАЗАТЬ ДАННЫЕ
-        {
-
-        }
-
         private void Button_Click_3(object sender, RoutedEventArgs e)//УДАЛИТЬ ИЗОБРАЖЕНИЕ
         {
 
         }
-
         private void ImageSource_BadgeChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
 
         }
-
         private void Button_Click_4(object sender, RoutedEventArgs e)//ОБНОВИТЬ
         {
             LoadProductsInListView();
         }
-
         private void textBoxSearchProduct_TextChanged(object sender, TextChangedEventArgs e)//ПОИСК 
         {
             TextBox textBox = sender as TextBox;
@@ -239,25 +217,92 @@ namespace PP.Pages
             }
 
         }
-
         private void listBoxViewProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             product = listBoxViewProducts.SelectedItem as Database.Product;
             LoadProducts();
         }
-
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
-            int result = connection.SaveChanges();
-            if (result==1)
+            try
             {
-                MessageBox.Show("Данные успешно отредактированы");
+                int result = connection.SaveChanges();
+                if (result == 1)
+                {
+                    MessageBox.Show("Данные успешно отредактированы");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }
+        private void Button_Click_6(object sender, RoutedEventArgs e)//УДАЛИТЬ ДАННЫЕ
+        {
+            //Database.Product product = new Database.Product();
+            var productDelete = listBoxViewProducts.SelectedItem as Database.Product;
+            
+            if (MessageBox.Show("Вы действительно хотите безвозвратно удалить данные?", "Предупреждение",MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    connection.Product.Remove(productDelete);
+                    int result = connection.SaveChanges();
+                    if (result > 0)
+                    {
+                        LoadProductsInListView();
+                        products = connection.Product.ToList();
+                        LoadProducts();
+                        MessageBox.Show("Данные безвозвратно удалены!");
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message.ToString());
+                }
             }
         }
 
-        private void Button_Click_6(object sender, RoutedEventArgs e)//УДАЛИТЬ ДАННЫЕ
+        private void textBoxViewSearchProduct_TextChanged(object sender, TextChangedEventArgs e)
         {
+            TextBox textBox = sender as TextBox;
+            if (textBox != null)
+            {
+                var text = textBox.Text.Trim();
+                products = connection.Product.Where(p => DbFunctions.Like(p.ProductName, "%" + text + "%")).ToList() ;
+                LoadProducts();
+            }
+        }
 
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string addUnit = textBoxAddUnit.Text.Trim();
+                if (addUnit.Length>0)
+                {
+                    Database.Unit unit = new Database.Unit();
+                    unit.UnitID = connection.Unit.ToList().Count() + 1;
+                    unit.UnitName = addUnit;
+                    connection.Unit.Add(unit);
+                    int result = connection.SaveChanges();
+                    if (result > 0 )
+                    {
+                        textBoxAddUnit.Clear();
+                        MessageBox.Show("Данные добавлены");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Введите данные");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
         }
     }
 }
