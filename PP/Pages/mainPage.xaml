@@ -33,7 +33,7 @@
                         <RowDefinition Height="83*"/>
                         <RowDefinition Height="84*"/>
                     </Grid.RowDefinitions>
-                    <TextBox Name="textBoxIDProduct" HorizontalAlignment="Left" Height="62" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="646"
+                    <TextBox Name="textBoxIDProduct" HorizontalAlignment="Left" IsReadOnly="True" Height="62" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="646"
                              materialDesign:HintAssist.Hint="ID" FontSize="20"
                              Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Row="1" Grid.ColumnSpan="2"/>
                     <TextBox Name="textBoxNumberProduct" HorizontalAlignment="Center" Height="62" Margin="10,10,11,15" TextWrapping="Wrap" VerticalAlignment="Center" Width="646"
@@ -142,10 +142,11 @@
             <TabItem Header="РАЗНОЕ">
                 <Grid Background="White">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="479*"/>
+                        <ColumnDefinition Width="62*"/>
+                        <ColumnDefinition Width="418*"/>
                         <ColumnDefinition Width="308*"/>
-                        <ColumnDefinition Width="400*"/>
-                        <ColumnDefinition Width="616*"/>
+                        <ColumnDefinition Width="277*"/>
+                        <ColumnDefinition Width="739*"/>
                         <ColumnDefinition Width="117*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -155,25 +156,45 @@
                         <RowDefinition Height="80*"/>
                         <RowDefinition Height="82*"/>
                         <RowDefinition Height="84*"/>
-                        <RowDefinition Height="423*"/>
+                        <RowDefinition Height="89*"/>
+                        <RowDefinition Height="334*"/>
                         <RowDefinition Height="140*"/>
                     </Grid.RowDefinitions>
-                    <ListBox Name="listBoxViewProducts" HorizontalAlignment="Center" Height="730" Margin="9,10,22,18" VerticalAlignment="Center" Width="585" Grid.Row="2" Grid.RowSpan="5" Grid.Column="3"/>
-                    <TextBox Name="textBoxViewIDProduct" HorizontalAlignment="Center" Height="70" Margin="77,15,10,12" TextWrapping="Wrap" VerticalAlignment="Center" Width="700" materialDesign:HintAssist.Hint="ID"
-                             FontSize="25" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.ColumnSpan="2" Grid.Row="1"/>
-                    <TextBox x:Name="textBoxViewNumberProduct" HorizontalAlignment="Center" Height="70" Margin="77,13,10,6" TextWrapping="Wrap" VerticalAlignment="Center" Width="700" 
+                    <ListBox Name="listBoxViewProducts" FontSize="25" ItemsSource="{Binding products}" HorizontalAlignment="Center" Height="730" Margin="10,10,10,18"
+                             VerticalAlignment="Center" Width="719" Grid.Row="2" Grid.RowSpan="6" Grid.Column="4" SelectionChanged="listBoxViewProducts_SelectionChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding ProductName}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <TextBox Name="textBoxViewIDProduct" Text="{Binding product.ProductID}" IsReadOnly="True" HorizontalAlignment="Center" Height="70" Margin="15.5,15,10,12" TextWrapping="Wrap" VerticalAlignment="Center" Width="700" materialDesign:HintAssist.Hint="ID"
+                             FontSize="25" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1"/>
+                    <TextBox x:Name="textBoxViewNumberProduct" Text="{Binding product.ProductNumber}" HorizontalAlignment="Center" Height="70" Margin="15.5,13,10,6" TextWrapping="Wrap" VerticalAlignment="Center" Width="700" 
                              materialDesign:HintAssist.Hint="Номер"
-                        FontSize="25" Style="{StaticResource ResourceKey=MaterialDesignOutlinedTextBox}" Grid.Row="2" Grid.ColumnSpan="2"/>
-                    <TextBox x:Name="textBoxViewNameProduct" HorizontalAlignment="Center" Height="70" Margin="77,9,10,1" TextWrapping="Wrap" VerticalAlignment="Center" Width="700" materialDesign:HintAssist.Hint="Наименование"
-                        FontSize="25" Style="{StaticResource ResourceKey=MaterialDesignOutlinedTextBox}" Grid.Row="3" Grid.ColumnSpan="2"/>
-                    <TextBox x:Name="textBoxViewCountProduct" HorizontalAlignment="Left" Height="70" Margin="77,5,0,7" TextWrapping="Wrap" VerticalAlignment="Center" Width="400" materialDesign:HintAssist.Hint="Количество"
-                        FontSize="25" Style="{StaticResource ResourceKey=MaterialDesignOutlinedTextBox}" Grid.Row="4"/>
-                    <TextBox x:Name="textBoxViewNoteProduct" HorizontalAlignment="Right" Height="70" Margin="0,4,10,10" TextWrapping="Wrap" VerticalAlignment="Center" Width="700" materialDesign:HintAssist.Hint="Примечание"
-                        FontSize="25" Style="{StaticResource ResourceKey=MaterialDesignOutlinedTextBox}" Grid.Row="5" Grid.ColumnSpan="2"/>
-                    <ComboBox Name="comboBoxViewUnitProduct" HorizontalAlignment="Center" Margin="3,5,10,7" VerticalAlignment="Center" Width="295" Height="70" materialDesign:HintAssist.Hint="Единица измерения"
-                              Style="{StaticResource MaterialDesignOutlinedComboBox}" FontSize="25" Grid.Row="4" Grid.Column="1"/>
-                    <TextBox Name="textBoxViewSearchProduct" HorizontalAlignment="Center" Height="70" Margin="10,15,22,12" TextWrapping="Wrap" VerticalAlignment="Center" Width="584" Grid.Column="3" Grid.Row="1"
+                        FontSize="25" Style="{StaticResource ResourceKey=MaterialDesignOutlinedTextBox}" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="1"/>
+                    <TextBox x:Name="textBoxViewNameProduct" Text="{Binding product.ProductName}" HorizontalAlignment="Center" Height="70" Margin="15.5,9,10,1" TextWrapping="Wrap" VerticalAlignment="Center" Width="700" materialDesign:HintAssist.Hint="Наименование"
+                        FontSize="25" Style="{StaticResource ResourceKey=MaterialDesignOutlinedTextBox}" Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="1"/>
+                    <TextBox x:Name="textBoxViewCountProduct" Text="{Binding product.Count}" HorizontalAlignment="Left" Height="70" Margin="15.5,5,0,7" TextWrapping="Wrap" VerticalAlignment="Center" Width="400" materialDesign:HintAssist.Hint="Количество"
+                        FontSize="25" Style="{StaticResource ResourceKey=MaterialDesignOutlinedTextBox}" Grid.Row="4" Grid.Column="1"/>
+                    <TextBox x:Name="textBoxViewNoteProduct" Text="{Binding product.ProductNote}" HorizontalAlignment="Right" Height="70" Margin="0,4,10,10" TextWrapping="Wrap" VerticalAlignment="Center" Width="700" materialDesign:HintAssist.Hint="Примечание"
+                        FontSize="25" Style="{StaticResource ResourceKey=MaterialDesignOutlinedTextBox}" Grid.Row="5" Grid.ColumnSpan="2" Grid.Column="1"/>
+                    <ComboBox Name="comboBoxViewUnitProduct" ItemsSource="{Binding units}" SelectedItem="{Binding product.Unit1}" HorizontalAlignment="Center" Margin="3,5,10,7" VerticalAlignment="Center" Width="295" Height="70" materialDesign:HintAssist.Hint="Единица измерения"
+                              Style="{StaticResource MaterialDesignOutlinedComboBox}" FontSize="25" Grid.Row="4" Grid.Column="2">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <Run Text="{Binding UnitName}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <TextBox Name="textBoxViewSearchProduct" HorizontalAlignment="Center" Height="70" Margin="10,15,10,12" TextWrapping="Wrap" VerticalAlignment="Center" Width="719" Grid.Column="4" Grid.Row="1"
                              FontSize="25" materialDesign:HintAssist.Hint="Поиск"/>
+                    <Button Content="РЕДАКТИРОВАТЬ ДАННЫЕ" FontSize="20" Grid.Column="1" HorizontalAlignment="Center" Margin="16,10,10,9" Grid.Row="6" VerticalAlignment="Center" Width="392" Height="70" Click="Button_Click_5"/>
+                    <Button Content="УДАЛИТЬ ДАННЫЕ" FontSize="20" Grid.Column="2" HorizontalAlignment="Center" Margin="10,10,10,9" Grid.Row="6" VerticalAlignment="Center" Width="288" Height="70" Click="Button_Click_6"/>
                 </Grid>
             </TabItem>
         </TabControl>

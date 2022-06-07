@@ -15,10 +15,9 @@
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="ProductID" />
-            <PropertyRef Name="ProductNumber" />
           </Key>
           <Property Name="ProductID" Type="int" Nullable="false" />
-          <Property Name="ProductNumber" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="ProductNumber" Type="nvarchar" MaxLength="25" />
           <Property Name="ProductName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Count" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Unit" Type="int" Nullable="false" />
@@ -85,10 +84,9 @@
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="ProductID" />
-            <PropertyRef Name="ProductNumber" />
           </Key>
           <Property Name="ProductID" Type="Int32" Nullable="false" />
-          <Property Name="ProductNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Count" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Unit" Type="Int32" Nullable="false" />

@@ -37,8 +37,8 @@ namespace PP.Pages
             LoadProductID();
             LoadUnits();
             LoadProductsInListView();
+            products = connection.Product.ToList();
             DataContext = this;
-
         }
         void LoadUnits()
         {
@@ -48,22 +48,26 @@ namespace PP.Pages
         {
             var currentProduct = connection.Product.ToList();
             listViewProducts.ItemsSource = currentProduct;
-
-
-            //int countSymbol = textBlockProductNote.Text.Trim();
-            //if (countSymbol.Length>10)
-            //{
-            //    textBlockProductNote.Text = +"\t";
-            //}
         }
         void LoadProductID()
         {
             int productID = connection.Product.ToList().Count() + 1;
             textBoxIDProduct.Text = productID.ToString();
         }
+        void LoadProducts()
+        {
+            textBoxViewIDProduct.GetBindingExpression(TextBox.TextProperty)?.UpdateTarget();
+            textBoxViewNumberProduct.GetBindingExpression(TextBox.TextProperty)?.UpdateTarget();
+            textBoxViewNameProduct.GetBindingExpression(TextBox.TextProperty)?.UpdateTarget();
+            textBoxViewCountProduct.GetBindingExpression(TextBox.TextProperty)?.UpdateTarget();
+            textBoxViewNoteProduct.GetBindingExpression(TextBox.TextProperty)?.UpdateTarget();
+            comboBoxViewUnitProduct.GetBindingExpression(ComboBox.SelectedItemProperty)?.UpdateTarget();
+            listBoxViewProducts.GetBindingExpression(ListBox.ItemsSourceProperty)?.UpdateTarget();
+
+        }
         private void Button_Click(object sender, RoutedEventArgs e)//ДОБАВИТЬ ПРОДУКЦИЮ
         {
-            if (textBoxCountProduct.Text.Length > 0 && textBoxIDProduct.Text.Length > 0 && textBoxNumberProduct.Text.Length > 0 && textBoxNameProduct.Text.Length > 0)
+            if (textBoxCountProduct.Text.Length > 0 && textBoxIDProduct.Text.Length > 0 && textBoxNameProduct.Text.Length > 0)
             {
                 if (comboBoxUnitName.SelectedIndex != -1)
                 {
@@ -84,7 +88,7 @@ namespace PP.Pages
                         textBoxNoteProduct.Clear();
                         comboBoxUnitName.SelectedIndex = -1;
                     }
-                    if (numberProduct.Length == 0 || nameProduct.Length == 0 || countProduct.Length == 0)
+                    if (nameProduct.Length == 0 || countProduct.Length == 0)
                     {
                         MessageBox.Show("Не все данные введенны");
                         return;
@@ -105,6 +109,9 @@ namespace PP.Pages
                         {
                             ClearText();
                             LoadProductID();
+                            LoadProductsInListView(); 
+                            products = connection.Product.ToList();
+                            LoadProducts();
                             MessageBox.Show("Данные добавлены");
                         }
                         else
@@ -167,7 +174,9 @@ namespace PP.Pages
             pngBitmapEncoder.Save(memoryStream);
             byte[] imgByte = memoryStream.ToArray();
             foreach (byte _imgByte in imgByte)
+            {
                 stringBuilder.Append(_imgByte).Append(";");
+            }
             stringBuilder.Remove(stringBuilder.Length - 1, 1);
             GetImageDatabase(stringBuilder.ToString());
 
@@ -195,7 +204,7 @@ namespace PP.Pages
             imageProductPhoto.Source = BitmapFrame.Create(memoryStream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
             imageProductPhoto.Style = FindResource("Image") as Style;
             imageProductPhoto.DataContext = ID;
-            
+
 
 
         }
@@ -228,6 +237,26 @@ namespace PP.Pages
                 products = connection.Product.Where(p => DbFunctions.Like(p.ProductName, "%" + textForSearch + "%") || DbFunctions.Like(p.ProductNumber, "%" + textForSearch + "%")).ToList();
                 listViewProducts.ItemsSource = products;
             }
+
+        }
+
+        private void listBoxViewProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            product = listBoxViewProducts.SelectedItem as Database.Product;
+            LoadProducts();
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            int result = connection.SaveChanges();
+            if (result==1)
+            {
+                MessageBox.Show("Данные успешно отредактированы");
+            }
+        }
+
+        private void Button_Click_6(object sender, RoutedEventArgs e)//УДАЛИТЬ ДАННЫЕ
+        {
 
         }
     }
