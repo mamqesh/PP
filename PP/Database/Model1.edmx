@@ -10,7 +10,7 @@
             <PropertyRef Name="ImageID" />
           </Key>
           <Property Name="ImageID" Type="int" Nullable="false" />
-          <Property Name="Image" Type="text" Nullable="false" />
+          <Property Name="Image" Type="nvarchar" MaxLength="4000" Nullable="false" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -78,7 +78,7 @@
             <PropertyRef Name="ImageID" />
           </Key>
           <Property Name="ImageID" Type="Int32" Nullable="false" />
-          <Property Name="Image1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Image1" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Product" Relationship="Self.FK__Product__Image__29572725" FromRole="Image" ToRole="Product" />
         </EntityType>
         <EntityType Name="Product">

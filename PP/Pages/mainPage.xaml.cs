@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.IO;
 using System.Drawing;
 using System.Data.Entity;
+using Microsoft.Win32;
 using PP.Database;
 using f = System.Windows.Forms;
 
@@ -30,7 +31,7 @@ namespace PP.Pages
         public List<Database.Unit> units { get; set; }
         public Database.Product product { get; set; }
         public List<Database.Product> products { get; set; }
-
+        string imageAdress = "";
         public mainPage()
         {
             InitializeComponent();
@@ -64,9 +65,20 @@ namespace PP.Pages
             comboBoxViewUnitProduct.GetBindingExpression(ComboBox.SelectedItemProperty)?.UpdateTarget();
             listBoxViewProducts.GetBindingExpression(ListBox.ItemsSourceProperty)?.UpdateTarget();
         }
+        void DeleteImage()
+        {
+            imageAdress = "";
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri("/Resources/picture.png", UriKind.Relative);
+            image.EndInit();
+            imageProductPhoto.Source = image;
+        }
         private void Button_Click(object sender, RoutedEventArgs e)//ДОБАВИТЬ ПРОДУКЦИЮ
         {
-            if (textBoxCountProduct.Text.Length > 0 && textBoxIDProduct.Text.Length > 0 && textBoxNameProduct.Text.Length > 0)
+            try
+            {
+                if (textBoxCountProduct.Text.Length > 0 && textBoxIDProduct.Text.Length > 0 && textBoxNameProduct.Text.Length > 0)
             {
                 if (comboBoxUnitName.SelectedIndex != -1)
                 {
@@ -94,32 +106,31 @@ namespace PP.Pages
                     }
                     else
                     {
-                        try
+                        int imageID = connection.Image.ToList().Count() + 1;
+                        Database.Image image = new Database.Image();
+                        image.ImageID = imageID;
+                        image.Image1 = imageAdress;
+                        connection.Image.Add(image);
+                        connection.SaveChanges();
+                        Database.Product product = new Database.Product();
+                        product.ProductID = int.Parse(idProduct);
+                        product.ProductNumber = numberProduct;
+                        product.ProductName = nameProduct;
+                        product.Count = countProduct;
+                        product.Unit1 = comboBoxUnitName.SelectedItem as Unit;
+                        product.ProductNote = noteProduct;
+                        product.Image = imageID;
+                        connection.Product.Add(product);
+                        int result = connection.SaveChanges();
+                        if (result == 1)
                         {
-                            Database.Product product = new Database.Product();
-                            product.ProductID = int.Parse(idProduct);
-                            product.ProductNumber = numberProduct;
-                            product.ProductName = nameProduct;
-                            product.Count = countProduct;
-                            product.Unit1 = comboBoxUnitName.SelectedItem as Unit;
-                            product.ProductNote = noteProduct;
-                            product.Image = 1;
-                            connection.Product.Add(product);
-                            int result = connection.SaveChanges();
-                            if (result == 1)
-                            {
-                                ClearText();
-                                LoadProductID();
-                                LoadProductsInListView();
-                                products = connection.Product.ToList();
-                                LoadProducts();
-                                MessageBox.Show("Данные добавлены");
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-
-                            MessageBox.Show(ex.Message.ToString());
+                            ClearText();
+                            LoadProductID();
+                            LoadProductsInListView();
+                            products = connection.Product.ToList();
+                            LoadProducts();
+                            DeleteImage();
+                            MessageBox.Show("Данные добавлены");
                         }
                     }
                 }
@@ -132,71 +143,94 @@ namespace PP.Pages
             {
                 MessageBox.Show("Не все поля заполнены");
             }
-
         }
+            catch (Exception ex)
+            {
 
+                MessageBox.Show(ex.Message.ToString(), "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+}
         private void Button_Click_1(object sender, RoutedEventArgs e)//ДОБАВИТЬ ИЗОБРАЖНИЕ
-        {
-            f.OpenFileDialog openFileDialog = new f.OpenFileDialog();
-            openFileDialog.Filter = "Формат изображения | *.png; *.jpg;";
-            if (openFileDialog.ShowDialog() == f.DialogResult.OK)
-            {
-                BitmapImage bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.UriSource = new Uri(openFileDialog.FileName, UriKind.Relative);
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.DecodePixelHeight = 256;
-                bitmapImage.EndInit();
-                GetImage(bitmapImage);
-            }
-        }
-        void GetImage(BitmapImage bitmapImage)
-        {
-            PngBitmapEncoder pngBitmapEncoder = new PngBitmapEncoder();
-            MemoryStream memoryStream = new MemoryStream();
-            StringBuilder stringBuilder = new StringBuilder();
-            pngBitmapEncoder.Frames.Add(BitmapFrame.Create(bitmapImage));
-            pngBitmapEncoder.Save(memoryStream);
-            byte[] imgByte = memoryStream.ToArray();
-            foreach (byte _imgByte in imgByte)
-            {
-                stringBuilder.Append(_imgByte).Append(";");
-            }
-            stringBuilder.Remove(stringBuilder.Length - 1, 1);
-            GetImageDatabase(stringBuilder.ToString());
-
-        }
-        void GetImageDatabase(string getImage)
         {
             try
             {
-                Database.Image image = new Database.Image();
-                image.ImageID = connection.Image.ToList().Count() + 1;
-                image.Image1 = getImage;
-                connection.Image.Add(image);
-                int result = connection.SaveChanges();
-                if (result != 0)
+                OpenFileDialog openFile = new OpenFileDialog();
+                if ((bool)openFile.ShowDialog())
                 {
-                    MessageBox.Show("Изображение добавлено");
+                    imageAdress = openFile.FileName;
+                    imageProductPhoto.Source = new BitmapImage(new Uri(openFile.FileName, UriKind.Absolute))
+                    {
+                        CreateOptions = BitmapCreateOptions.IgnoreImageCache
+                    };
                 }
             }
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message.ToString());
+                MessageBox.Show(ex.Message, "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            //f.OpenFileDialog openFileDialog = new f.OpenFileDialog();
+            //openFileDialog.Filter = "Формат изображения | *.png; *.jpg;";
+            //if (openFileDialog.ShowDialog() == f.DialogResult.OK)
+            //{
+            //    BitmapImage bitmapImage = new BitmapImage();
+            //    bitmapImage.BeginInit();
+            //    bitmapImage.UriSource = new Uri(openFileDialog.FileName, UriKind.Relative);
+            //    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+            //    bitmapImage.DecodePixelHeight = 256;
+            //    bitmapImage.EndInit();
+            //    GetImage(bitmapImage);
+            //}
+
+
         }
-        void GetImageInWindow(string ID, string ByteGet)
-        {
-            byte[] imageByte = ByteGet.Split(';').Select(a => byte.Parse(a)).ToArray();
-            MemoryStream memoryStream = new MemoryStream(imageByte);
-            imageProductPhoto.Source = BitmapFrame.Create(memoryStream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
-            imageProductPhoto.Style = FindResource("Image") as Style;
-            imageProductPhoto.DataContext = ID;
-        }
+        //void GetImage(BitmapImage bitmapImage)
+        //{
+        //    PngBitmapEncoder pngBitmapEncoder = new PngBitmapEncoder();
+        //    MemoryStream memoryStream = new MemoryStream();
+        //    StringBuilder stringBuilder = new StringBuilder();
+        //    pngBitmapEncoder.Frames.Add(BitmapFrame.Create(bitmapImage));
+        //    pngBitmapEncoder.Save(memoryStream);
+        //    byte[] imgByte = memoryStream.ToArray();
+        //    foreach (byte _imgByte in imgByte)
+        //    {
+        //        stringBuilder.Append(_imgByte).Append(";");
+        //    }
+        //    stringBuilder.Remove(stringBuilder.Length - 1, 1);
+        //    GetImageDatabase(stringBuilder.ToString());
+
+        //}
+        //void GetImageDatabase(string getImage)
+        //{
+        //    try
+        //    {
+        //        Database.Image image = new Database.Image();
+        //        image.ImageID = connection.Image.ToList().Count() + 1;
+        //        image.Image1 = getImage;
+        //        connection.Image.Add(image);
+        //        int result = connection.SaveChanges();
+        //        if (result != 0)
+        //        {
+        //            MessageBox.Show("Изображение добавлено");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        MessageBox.Show(ex.Message.ToString());
+        //    }
+        //}
+        //void GetImageInWindow(string ID, string ByteGet)
+        //{
+        //    byte[] imageByte = ByteGet.Split(';').Select(a => byte.Parse(a)).ToArray();
+        //    MemoryStream memoryStream = new MemoryStream(imageByte);
+        //    imageProductPhoto.Source = BitmapFrame.Create(memoryStream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+        //    imageProductPhoto.Style = FindResource("Image") as Style;
+        //    imageProductPhoto.DataContext = ID;
+        //}
         private void Button_Click_3(object sender, RoutedEventArgs e)//УДАЛИТЬ ИЗОБРАЖЕНИЕ
         {
-
+            DeleteImage();
         }
         private void ImageSource_BadgeChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
@@ -242,8 +276,8 @@ namespace PP.Pages
         {
             //Database.Product product = new Database.Product();
             var productDelete = listBoxViewProducts.SelectedItem as Database.Product;
-            
-            if (MessageBox.Show("Вы действительно хотите безвозвратно удалить данные?", "Предупреждение",MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+
+            if (MessageBox.Show("Вы действительно хотите безвозвратно удалить данные?", "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 try
                 {
@@ -271,7 +305,7 @@ namespace PP.Pages
             if (textBox != null)
             {
                 var text = textBox.Text.Trim();
-                products = connection.Product.Where(p => DbFunctions.Like(p.ProductName, "%" + text + "%")).ToList() ;
+                products = connection.Product.Where(p => DbFunctions.Like(p.ProductName, "%" + text + "%")).ToList();
                 LoadProducts();
             }
         }
@@ -281,14 +315,14 @@ namespace PP.Pages
             try
             {
                 string addUnit = textBoxAddUnit.Text.Trim();
-                if (addUnit.Length>0)
+                if (addUnit.Length > 0)
                 {
                     Database.Unit unit = new Database.Unit();
                     unit.UnitID = connection.Unit.ToList().Count() + 1;
                     unit.UnitName = addUnit;
                     connection.Unit.Add(unit);
                     int result = connection.SaveChanges();
-                    if (result > 0 )
+                    if (result > 0)
                     {
                         textBoxAddUnit.Clear();
                         MessageBox.Show("Данные добавлены");

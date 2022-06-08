@@ -160,9 +160,6 @@
     <Resource Include="Resources\picture.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\photo.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Database\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

@@ -62,8 +62,11 @@
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Row="5" Grid.ColumnSpan="2"/>
                     <Button Content="ДОБАВИТЬ ПРОДУКТ" HorizontalAlignment="Center" Margin="24,10,11,18" Grid.Row="6" VerticalAlignment="Center"
                             Width="264" Height="73" FontSize="20" Click="Button_Click" Grid.Column="1"/>
-                    <Image Grid.Column="2" Margin="424,72,318,227" Grid.Row="1" Source="/Resources/picture.png" Stretch="Fill" Grid.RowSpan="7" Grid.ColumnSpan="3"/>
-                    <Image Name="imageProductPhoto" Grid.Column="2" HorizontalAlignment="Left" Height="718" Margin="10,10,0,0" Grid.RowSpan="7" VerticalAlignment="Top" Width="1234" Grid.Row="1" Grid.ColumnSpan="3"/>
+                    <Border BorderThickness="1" CornerRadius="15" 
+                            BorderBrush="Black" Background="WhiteSmoke" Grid.Column="2" Margin="56,14,61,10" Grid.ColumnSpan="3" Grid.RowSpan="7"
+                            HorizontalAlignment="Center" Width="1136" Grid.Row="1">
+                        <Image Name="imageProductPhoto" Grid.Column="2" Margin="9" Grid.Row="1" Source="/Resources/picture.png" Grid.RowSpan="7" Grid.ColumnSpan="3"/>
+                    </Border>
                     <Button Content="ДОБАВИТЬ ИЗОБРАЖЕНИЕ" HorizontalAlignment="Right" Margin="0,3,10,6" Grid.Row="8" VerticalAlignment="Center"
                         Width="302" Height="74" FontSize="18" Grid.Column="4" Click="Button_Click_1"/>
                     <Button Content="УДАЛИТЬ ИЗОБРАЖЕНИЕ" HorizontalAlignment="Center" Margin="10,3,10,6" Grid.Row="8" VerticalAlignment="Center"
@@ -111,7 +114,7 @@
                                         <Image.Source>
                                             <Binding Path="Image1">
                                                 <Binding.TargetNullValue>
-                                                    <ImageSource>/Resources/photo.png</ImageSource>
+                                                    <ImageSource>/Resources/picture.png</ImageSource>
                                                 </Binding.TargetNullValue>
                                             </Binding>
                                         </Image.Source>

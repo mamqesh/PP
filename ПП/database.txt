@@ -9,7 +9,7 @@ CREATE TABLE [Unit] (
 GO
 CREATE TABLE [Image] (
 	ImageID integer PRIMARY KEY NOT NULL,
-	[Image] TEXT NOT NULL
+	[Image] nvarchar(4000)
 )
 GO
 CREATE TABLE [Product] (
@@ -26,5 +26,4 @@ INSERT INTO Unit (UnitID, UnitName) VALUES
 ('1',N'шт.'),
 ('2',N'п/м')
 GO
-INSERT INTO [Image] (ImageID, [Image]) VALUES
-(1,'1')
+
