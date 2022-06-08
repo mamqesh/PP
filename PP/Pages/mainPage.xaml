@@ -33,7 +33,7 @@
                         <RowDefinition Height="83*"/>
                         <RowDefinition Height="84*"/>
                     </Grid.RowDefinitions>
-                    <TextBox Name="textBoxIDProduct" HorizontalAlignment="Left" IsReadOnly="True" Height="62" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="646"
+                    <TextBox Name="textBoxIDProduct" HorizontalAlignment="Left" Height="62" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="646"
                              materialDesign:HintAssist.Hint="ID" FontSize="20"
                              Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.Row="1" Grid.ColumnSpan="2"/>
                     <TextBox Name="textBoxNumberProduct" HorizontalAlignment="Center" Height="62" Margin="10,10,11,15" TextWrapping="Wrap" VerticalAlignment="Center" Width="646"
@@ -90,7 +90,7 @@
                         <RowDefinition Height="87*"/>
                     </Grid.RowDefinitions>
                     <ListView Name="listViewProducts"  Height="918"  Margin="32,20,0.54,7"
-                              ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Center" Width="1432" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="3" VerticalAlignment="Center" >
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Center" Width="1432" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="3" VerticalAlignment="Center" >
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="Focusable" Value="False"/>
@@ -110,11 +110,11 @@
                                         <RowDefinition Height="auto"/>
                                         <RowDefinition Height="auto"/>
                                     </Grid.RowDefinitions>
-                                    <Image Width="400" Grid.Row="1" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="1">
+                                    <Image Width="400" Grid.Row="1" Stretch="UniformToFill" HorizontalAlignment="Center" Margin="1">
                                         <Image.Source>
-                                            <Binding Path="Image1">
+                                            <Binding Path="product.Image1.Image1">
                                                 <Binding.TargetNullValue>
-                                                    <ImageSource>/Resources/picture.png</ImageSource>
+                                                    <ImageSource>../Resources/picture.png</ImageSource>
                                                 </Binding.TargetNullValue>
                                             </Binding>
                                         </Image.Source>
@@ -151,14 +151,14 @@
                         <RowDefinition Height="37*"/>
                         <RowDefinition Height="97*"/>
                         <RowDefinition Height="89*"/>
-                        <RowDefinition Height="80*"/>
-                        <RowDefinition Height="82*"/>
-                        <RowDefinition Height="84*"/>
-                        <RowDefinition Height="89*"/>
-                        <RowDefinition Height="334*"/>
-                        <RowDefinition Height="140*"/>
+                        <RowDefinition Height="96*"/>
+                        <RowDefinition Height="93*"/>
+                        <RowDefinition Height="96*"/>
+                        <RowDefinition Height="105*"/>
+                        <RowDefinition Height="343*"/>
+                        <RowDefinition Height="76*"/>
                     </Grid.RowDefinitions>
-                    <ListBox Name="listBoxViewProducts" FontSize="25" ItemsSource="{Binding products}" HorizontalAlignment="Center" Height="730" Margin="10,10,10,18"
+                    <ListBox Name="listBoxViewProducts" FontSize="25" ItemsSource="{Binding products}" HorizontalAlignment="Center" Height="770" Margin="10,42,10,10"
                              VerticalAlignment="Center" Width="719" Grid.Row="2" Grid.RowSpan="6" Grid.Column="4" SelectionChanged="listBoxViewProducts_SelectionChanged">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -168,18 +168,18 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                    <TextBox Name="textBoxViewIDProduct" Text="{Binding product.ProductID}" IsReadOnly="True" HorizontalAlignment="Center" Height="70" Margin="15.5,15,10,12" TextWrapping="Wrap" VerticalAlignment="Center" Width="700" materialDesign:HintAssist.Hint="ID"
+                    <TextBox Name="textBoxViewIDProduct" Text="{Binding product.ProductID}" IsReadOnly="True" HorizontalAlignment="Left" Height="70" Margin="16,10,0,17" TextWrapping="Wrap" VerticalAlignment="Center" Width="700" materialDesign:HintAssist.Hint="ID"
                              FontSize="25" Style="{StaticResource MaterialDesignOutlinedTextBox}" Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1"/>
-                    <TextBox x:Name="textBoxViewNumberProduct" Text="{Binding product.ProductNumber}" HorizontalAlignment="Center" Height="70" Margin="15.5,13,10,6" TextWrapping="Wrap" VerticalAlignment="Center" Width="700" 
+                    <TextBox x:Name="textBoxViewNumberProduct" Text="{Binding product.ProductNumber}" HorizontalAlignment="Left" Height="70" Margin="16,14,0,5" TextWrapping="Wrap" VerticalAlignment="Center" Width="700" 
                              materialDesign:HintAssist.Hint="Номер"
                         FontSize="25" Style="{StaticResource ResourceKey=MaterialDesignOutlinedTextBox}" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="1"/>
-                    <TextBox x:Name="textBoxViewNameProduct" Text="{Binding product.ProductName}" HorizontalAlignment="Center" Height="70" Margin="15.5,9,10,1" TextWrapping="Wrap" VerticalAlignment="Center" Width="700" materialDesign:HintAssist.Hint="Наименование"
+                    <TextBox x:Name="textBoxViewNameProduct" Text="{Binding product.ProductName}" HorizontalAlignment="Left" Height="70" Margin="16,13,0,13" TextWrapping="Wrap" VerticalAlignment="Center" Width="700" materialDesign:HintAssist.Hint="Наименование"
                         FontSize="25" Style="{StaticResource ResourceKey=MaterialDesignOutlinedTextBox}" Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="1"/>
-                    <TextBox x:Name="textBoxViewCountProduct" Text="{Binding product.Count}" HorizontalAlignment="Left" Height="70" Margin="15.5,5,0,7" TextWrapping="Wrap" VerticalAlignment="Center" Width="400" materialDesign:HintAssist.Hint="Количество"
+                    <TextBox x:Name="textBoxViewCountProduct" Text="{Binding product.Count}" HorizontalAlignment="Left" Height="69" Margin="16,14,0,10" TextWrapping="Wrap" VerticalAlignment="Center" Width="400" materialDesign:HintAssist.Hint="Количество"
                         FontSize="25" Style="{StaticResource ResourceKey=MaterialDesignOutlinedTextBox}" Grid.Row="4" Grid.Column="1"/>
-                    <TextBox x:Name="textBoxViewNoteProduct" Text="{Binding product.ProductNote}" HorizontalAlignment="Right" Height="70" Margin="0,4,10,10" TextWrapping="Wrap" VerticalAlignment="Center" Width="700" materialDesign:HintAssist.Hint="Примечание"
+                    <TextBox x:Name="textBoxViewNoteProduct" Text="{Binding product.ProductNote}" Height="70" Margin="16,12,10,14" TextWrapping="Wrap" VerticalAlignment="Center" materialDesign:HintAssist.Hint="Примечание"
                         FontSize="25" Style="{StaticResource ResourceKey=MaterialDesignOutlinedTextBox}" Grid.Row="5" Grid.ColumnSpan="2" Grid.Column="1"/>
-                    <ComboBox Name="comboBoxViewUnitProduct" ItemsSource="{Binding units}" SelectedItem="{Binding product.Unit1}" HorizontalAlignment="Center" Margin="3,5,10,7" VerticalAlignment="Center" Width="295" Height="70" materialDesign:HintAssist.Hint="Единица измерения"
+                    <ComboBox Name="comboBoxViewUnitProduct" ItemsSource="{Binding units}" SelectedItem="{Binding product.Unit1}" HorizontalAlignment="Left" Margin="3,14,0,10" VerticalAlignment="Center" Width="295" Height="69" materialDesign:HintAssist.Hint="Единица измерения"
                               Style="{StaticResource MaterialDesignOutlinedComboBox}" FontSize="25" Grid.Row="4" Grid.Column="2">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
@@ -191,8 +191,14 @@
                     </ComboBox>
                     <TextBox Name="textBoxViewSearchProduct" HorizontalAlignment="Center" Height="70" Margin="10,15,10,12" TextWrapping="Wrap" VerticalAlignment="Center" Width="719" Grid.Column="4" Grid.Row="1"
                              FontSize="25" materialDesign:HintAssist.Hint="Поиск" TextChanged="textBoxViewSearchProduct_TextChanged"/>
-                    <Button Content="РЕДАКТИРОВАТЬ ДАННЫЕ" FontSize="20" Grid.Column="1" HorizontalAlignment="Center" Margin="16,10,10,9" Grid.Row="6" VerticalAlignment="Center" Width="392" Height="70" Click="Button_Click_5"/>
-                    <Button Content="УДАЛИТЬ ДАННЫЕ" FontSize="20" Grid.Column="2" HorizontalAlignment="Center" Margin="10,10,10,9" Grid.Row="6" VerticalAlignment="Center" Width="288" Height="70" Click="Button_Click_6"/>
+                    <Button Content="РЕДАКТИРОВАТЬ ДАННЫЕ" FontSize="20" Grid.Column="1" HorizontalAlignment="Center" Margin="16,17,10,18" Grid.Row="6" VerticalAlignment="Center" Width="392" Height="70" Click="Button_Click_5"/>
+                    <Button Content="УДАЛИТЬ ДАННЫЕ" FontSize="20" Grid.Column="2" HorizontalAlignment="Center" Margin="10,17,10,18" Grid.Row="6" VerticalAlignment="Center" Width="288" Height="70" Click="Button_Click_6"/>
+                    <Border BorderThickness="1" BorderBrush="Black" CornerRadius="10" Grid.Column="1" Margin="16,10,10,10" Grid.Row="7" Grid.ColumnSpan="2"
+                            Background="WhiteSmoke">
+                        <Image Grid.Column="1" Margin="9" Source="..\Resources\picture.png"
+                           Grid.Row="7" Grid.ColumnSpan="2" Name="imageProductView" />
+                    </Border>
+
                 </Grid>
             </TabItem>
             <TabItem Header="РАЗНОЕ">
