@@ -89,11 +89,14 @@
                         <RowDefinition Height="672*"/>
                         <RowDefinition Height="87*"/>
                     </Grid.RowDefinitions>
-                    <ListView Name="listViewProducts"  Height="918"  Margin="32,20,0.54,7"
+                    <ListView Name="listViewProducts"  Height="918"  Margin="32,20,0.54,7" 
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Center" Width="1432" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="3" VerticalAlignment="Center" >
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="Focusable" Value="False"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                                <Setter Property="Background" Value="WhiteSmoke"/>
+                                <Setter Property="IsEnabled" Value="True"/>
                             </Style>
                         </ListView.ItemContainerStyle>
                         <ListView.ItemsPanel>
@@ -194,10 +197,16 @@
                     <Button Content="РЕДАКТИРОВАТЬ ДАННЫЕ" FontSize="20" Grid.Column="1" HorizontalAlignment="Center" Margin="16,17,10,18" Grid.Row="6" VerticalAlignment="Center" Width="392" Height="70" Click="Button_Click_5"/>
                     <Button Content="УДАЛИТЬ ДАННЫЕ" FontSize="20" Grid.Column="2" HorizontalAlignment="Center" Margin="10,17,10,18" Grid.Row="6" VerticalAlignment="Center" Width="288" Height="70" Click="Button_Click_6"/>
                     <Border BorderThickness="1" BorderBrush="Black" CornerRadius="10" Grid.Column="1" Margin="16,10,10,10" Grid.Row="7" Grid.ColumnSpan="2"
-                            Background="WhiteSmoke">
+                            Background="WhiteSmoke" HorizontalAlignment="Center" Width="700" Height="323" VerticalAlignment="Center">
                         <Image Grid.Column="1" Margin="9" Source="..\Resources\picture.png"
                            Grid.Row="7" Grid.ColumnSpan="2" Name="imageProductView" />
                     </Border>
+                    <Button Grid.Column="3" Background="WhiteSmoke" BorderBrush="Black" HorizontalAlignment="Right" Margin="0,204,194,0" Grid.Row="7" VerticalAlignment="Top" Width="72" Height="62" Click="Button_Click_8">
+                        <Image Source="../Resources/pen.png"/>
+                    </Button>
+                    <Button Grid.Column="3" Background="WhiteSmoke" BorderBrush="Black" HorizontalAlignment="Right" Margin="0,271,194,0" Grid.Row="7" VerticalAlignment="Top" Width="72" Height="62" Click="Button_Click_7">
+                        <Image Source="../Resources/trash.png"/>
+                    </Button>
 
                 </Grid>
             </TabItem>

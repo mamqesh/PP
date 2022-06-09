@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PP"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1080" Width="1920"
+        Title="Учет данных о продукции" Height="1080" Width="1920"
         WindowState="Maximized">
     <Grid>
         <Frame Name="MainFrame"></Frame>

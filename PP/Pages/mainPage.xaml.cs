@@ -155,7 +155,7 @@ namespace PP.Pages
             }
             catch (Exception ex)
             {
-                if (productID==product.ProductID)
+                if (productID == product.ProductID)
                 {
                     LoadProductID();
                 }
@@ -180,63 +180,7 @@ namespace PP.Pages
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            //f.OpenFileDialog openFileDialog = new f.OpenFileDialog();
-            //openFileDialog.Filter = "Формат изображения | *.png; *.jpg;";
-            //if (openFileDialog.ShowDialog() == f.DialogResult.OK)
-            //{
-            //    BitmapImage bitmapImage = new BitmapImage();
-            //    bitmapImage.BeginInit();
-            //    bitmapImage.UriSource = new Uri(openFileDialog.FileName, UriKind.Relative);
-            //    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-            //    bitmapImage.DecodePixelHeight = 256;
-            //    bitmapImage.EndInit();
-            //    GetImage(bitmapImage);
-            //}
         }
-        //void GetImage(BitmapImage bitmapImage)
-        //{
-        //    PngBitmapEncoder pngBitmapEncoder = new PngBitmapEncoder();
-        //    MemoryStream memoryStream = new MemoryStream();
-        //    StringBuilder stringBuilder = new StringBuilder();
-        //    pngBitmapEncoder.Frames.Add(BitmapFrame.Create(bitmapImage));
-        //    pngBitmapEncoder.Save(memoryStream);
-        //    byte[] imgByte = memoryStream.ToArray();
-        //    foreach (byte _imgByte in imgByte)
-        //    {
-        //        stringBuilder.Append(_imgByte).Append(";");
-        //    }
-        //    stringBuilder.Remove(stringBuilder.Length - 1, 1);
-        //    GetImageDatabase(stringBuilder.ToString());
-
-        //}
-        //void GetImageDatabase(string getImage)
-        //{
-        //    try
-        //    {
-        //        Database.Image image = new Database.Image();
-        //        image.ImageID = connection.Image.ToList().Count() + 1;
-        //        image.Image1 = getImage;
-        //        connection.Image.Add(image);
-        //        int result = connection.SaveChanges();
-        //        if (result != 0)
-        //        {
-        //            MessageBox.Show("Изображение добавлено");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //        MessageBox.Show(ex.Message.ToString());
-        //    }
-        //}
-        //void GetImageInWindow(string ID, string ByteGet)
-        //{
-        //    byte[] imageByte = ByteGet.Split(';').Select(a => byte.Parse(a)).ToArray();
-        //    MemoryStream memoryStream = new MemoryStream(imageByte);
-        //    imageProductPhoto.Source = BitmapFrame.Create(memoryStream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
-        //    imageProductPhoto.Style = FindResource("Image") as Style;
-        //    imageProductPhoto.DataContext = ID;
-        //}
         private void Button_Click_3(object sender, RoutedEventArgs e)//УДАЛИТЬ ИЗОБРАЖЕНИЕ
         {
             DeleteImage();
@@ -266,7 +210,7 @@ namespace PP.Pages
             {
                 product = listBoxViewProducts.SelectedItem as Database.Product;
                 LoadProducts();
-                if (listBoxViewProducts.SelectedItem!=null)
+                if (listBoxViewProducts.SelectedItem != null)
                 {
                     string imageView = product.Image1.Image1;
                     if (imageView == "")
@@ -282,14 +226,14 @@ namespace PP.Pages
                 {
                     imageProductView.Source = new BitmapImage(new Uri("../Resources/picture.png", UriKind.Relative));
                 }
-              
+
             }
             catch (Exception ex)
             {
                 imageProductView.Source = new BitmapImage(new Uri("../Resources/picture.png", UriKind.Relative));
                 MessageBox.Show(ex.Message.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
+
         }
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
@@ -310,11 +254,15 @@ namespace PP.Pages
         private void Button_Click_6(object sender, RoutedEventArgs e)//УДАЛИТЬ ДАННЫЕ
         {
             var productDelete = listBoxViewProducts.SelectedItem as Database.Product;
-
             if (MessageBox.Show("Вы действительно хотите безвозвратно удалить данные?", "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 try
                 {
+                    //var imageDeleteID = productDelete.Image1.ImageID;
+                    //var imageDeletePicture = productDelete.Image1.Image1;
+                    //connection.Image.Remove(imageDeleteID);
+                    //connection.Image.Remove(imageDeletePicture);
+
                     connection.Product.Remove(productDelete);
                     int result = connection.SaveChanges();
                     if (result > 0)
@@ -369,6 +317,31 @@ namespace PP.Pages
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Button_Click_7(object sender, RoutedEventArgs e) //УДАЛИТЬ ФОТО ИЗ БАЗЫ ПРИ РЕДАКТИРОВАНИЕ
+        {
+
+        }
+
+        private void Button_Click_8(object sender, RoutedEventArgs e) //РЕДАКТИРОВАТЬ ФОТО ИЗ БАЗЫ
+        {
+            try
+            {
+                OpenFileDialog openFile = new OpenFileDialog();
+                if ((bool)openFile.ShowDialog())
+                {
+                    imageAdress = openFile.FileName;
+                    imageProductView.Source = new BitmapImage(new Uri(openFile.FileName, UriKind.Absolute))
+                    {
+                        CreateOptions = BitmapCreateOptions.IgnoreImageCache
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
