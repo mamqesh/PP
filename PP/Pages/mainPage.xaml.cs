@@ -202,7 +202,6 @@ namespace PP.Pages
                 products = connection.Product.Where(p => DbFunctions.Like(p.ProductName, "%" + textForSearch + "%") || DbFunctions.Like(p.ProductNumber, "%" + textForSearch + "%")).ToList();
                 listViewProducts.ItemsSource = products;
             }
-
         }
         private void listBoxViewProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -226,14 +225,12 @@ namespace PP.Pages
                 {
                     imageProductView.Source = new BitmapImage(new Uri("../Resources/picture.png", UriKind.Relative));
                 }
-
             }
             catch (Exception ex)
             {
                 imageProductView.Source = new BitmapImage(new Uri("../Resources/picture.png", UriKind.Relative));
                 MessageBox.Show(ex.Message.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
         }
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
@@ -258,11 +255,6 @@ namespace PP.Pages
             {
                 try
                 {
-                    //var imageDeleteID = productDelete.Image1.ImageID;
-                    //var imageDeletePicture = productDelete.Image1.Image1;
-                    //connection.Image.Remove(imageDeleteID);
-                    //connection.Image.Remove(imageDeletePicture);
-
                     connection.Product.Remove(productDelete);
                     int result = connection.SaveChanges();
                     if (result > 0)
@@ -319,12 +311,10 @@ namespace PP.Pages
                 MessageBox.Show(ex.Message.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
         private void Button_Click_7(object sender, RoutedEventArgs e) //УДАЛИТЬ ФОТО ИЗ БАЗЫ ПРИ РЕДАКТИРОВАНИЕ
         {
 
         }
-
         private void Button_Click_8(object sender, RoutedEventArgs e) //РЕДАКТИРОВАТЬ ФОТО ИЗ БАЗЫ
         {
             try
