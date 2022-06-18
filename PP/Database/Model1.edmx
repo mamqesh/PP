@@ -31,7 +31,7 @@
           <Property Name="UnitID" Type="int" Nullable="false" />
           <Property Name="UnitName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Product__Image__440B1D61">
+        <Association Name="FK__Product__Image__5FB337D6">
           <End Role="Image" Type="Self.Image" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -43,7 +43,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Product__Unit__4316F928">
+        <Association Name="FK__Product__Unit__5EBF139D">
           <End Role="Unit" Type="Self.Unit" Multiplicity="1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -59,11 +59,11 @@
           <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Unit" EntityType="Self.Unit" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Product__Image__440B1D61" Association="Self.FK__Product__Image__440B1D61">
+          <AssociationSet Name="FK__Product__Image__5FB337D6" Association="Self.FK__Product__Image__5FB337D6">
             <End Role="Image" EntitySet="Image" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK__Product__Unit__4316F928" Association="Self.FK__Product__Unit__4316F928">
+          <AssociationSet Name="FK__Product__Unit__5EBF139D" Association="Self.FK__Product__Unit__5EBF139D">
             <End Role="Unit" EntitySet="Unit" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
@@ -79,7 +79,7 @@
           </Key>
           <Property Name="ImageID" Type="Int32" Nullable="false" />
           <Property Name="Image1" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Product" Relationship="Self.FK__Product__Image__440B1D61" FromRole="Image" ToRole="Product" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Product__Image__5FB337D6" FromRole="Image" ToRole="Product" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -92,8 +92,8 @@
           <Property Name="Unit" Type="Int32" Nullable="false" />
           <Property Name="ProductNote" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Image" Type="Int32" />
-          <NavigationProperty Name="Image1" Relationship="Self.FK__Product__Image__440B1D61" FromRole="Product" ToRole="Image" />
-          <NavigationProperty Name="Unit1" Relationship="Self.FK__Product__Unit__4316F928" FromRole="Product" ToRole="Unit" />
+          <NavigationProperty Name="Image1" Relationship="Self.FK__Product__Image__5FB337D6" FromRole="Product" ToRole="Image" />
+          <NavigationProperty Name="Unit1" Relationship="Self.FK__Product__Unit__5EBF139D" FromRole="Product" ToRole="Unit" />
         </EntityType>
         <EntityType Name="Unit">
           <Key>
@@ -101,9 +101,9 @@
           </Key>
           <Property Name="UnitID" Type="Int32" Nullable="false" />
           <Property Name="UnitName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="Self.FK__Product__Unit__4316F928" FromRole="Unit" ToRole="Product" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Product__Unit__5EBF139D" FromRole="Unit" ToRole="Product" />
         </EntityType>
-        <Association Name="FK__Product__Image__440B1D61">
+        <Association Name="FK__Product__Image__5FB337D6">
           <End Role="Image" Type="Self.Image" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -115,7 +115,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Product__Unit__4316F928">
+        <Association Name="FK__Product__Unit__5EBF139D">
           <End Role="Unit" Type="Self.Unit" Multiplicity="1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -131,11 +131,11 @@
           <EntitySet Name="Image" EntityType="Self.Image" />
           <EntitySet Name="Product" EntityType="Self.Product" />
           <EntitySet Name="Unit" EntityType="Self.Unit" />
-          <AssociationSet Name="FK__Product__Image__440B1D61" Association="Self.FK__Product__Image__440B1D61">
+          <AssociationSet Name="FK__Product__Image__5FB337D6" Association="Self.FK__Product__Image__5FB337D6">
             <End Role="Image" EntitySet="Image" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK__Product__Unit__4316F928" Association="Self.FK__Product__Unit__4316F928">
+          <AssociationSet Name="FK__Product__Unit__5EBF139D" Association="Self.FK__Product__Unit__5EBF139D">
             <End Role="Unit" EntitySet="Unit" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
